@@ -1,26 +1,28 @@
 /**
  * State-based routing for AngularJS 1.x
- * @version v1.0.11
+ * @version v1.0.17
  * @link https://ui-router.github.io
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@uirouter/core'), require('angular')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@uirouter/core', 'angular'], factory) :
-	(factory((global['@uirouter/angularjs-resolve-service'] = {}),global['@uirouter/core'],global.angular));
-}(this, (function (exports,core,angular) { 'use strict';
+(function(global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined'
+    ? factory(exports, require('@uirouter/core'), require('angular'))
+    : typeof define === 'function' && define.amd
+      ? define(['exports', '@uirouter/core', 'angular'], factory)
+      : factory((global['@uirouter/angularjs-resolve-service'] = {}), global['@uirouter/core'], global.angular);
+})(this, function(exports, core, angular) {
+  'use strict' /** */;
 
-/** @module ng1 */ /** */
-/**
- * Implementation of the legacy `$resolve` service for angular 1.
- */
-var $resolve = {
+  /** @module ng1 */ /**
+   * Implementation of the legacy `$resolve` service for angular 1.
+   */
+  var $resolve = {
     /**
      * Asynchronously injects a resolve block.
      *
      * This emulates most of the behavior of the ui-router 0.2.x $resolve.resolve() service API.
      *
-    * ### Not bundled by default
+     * ### Not bundled by default
      *
      * This API is no longer not part of the standard `@uirouter/angularjs` bundle.
      * For users of the prebuilt bundles, add the `release/resolveService.min.js` UMD bundle.
@@ -51,33 +53,46 @@ var $resolve = {
      * @param locals key/value pre-resolved data (locals)
      * @param parent a promise for a "parent resolve"
      */
-    resolve: function (invocables, locals, parent) {
-        if (locals === void 0) { locals = {}; }
-        var parentNode = new core.PathNode(new core.StateObject({ params: {}, resolvables: [] }));
-        var node = new core.PathNode(new core.StateObject({ params: {}, resolvables: [] }));
-        var context = new core.ResolveContext([parentNode, node]);
-        context.addResolvables(core.resolvablesBuilder({ resolve: invocables }), node.state);
-        var resolveData = function (parentLocals) {
-            var rewrap = function (_locals) { return core.resolvablesBuilder({ resolve: core.mapObj(_locals, function (local) { return function () { return local; }; }) }); };
-            context.addResolvables(rewrap(parentLocals), parentNode.state);
-            context.addResolvables(rewrap(locals), node.state);
-            var tuples2ObjR = function (acc, tuple) {
-                acc[tuple.token] = tuple.value;
-                return acc;
-            };
-            return context.resolvePath().then(function (results) { return results.reduce(tuples2ObjR, {}); });
+    resolve: function(invocables, locals, parent) {
+      if (locals === void 0) {
+        locals = {};
+      }
+      var parentNode = new core.PathNode(new core.StateObject({ params: {}, resolvables: [] }));
+      var node = new core.PathNode(new core.StateObject({ params: {}, resolvables: [] }));
+      var context = new core.ResolveContext([parentNode, node]);
+      context.addResolvables(core.resolvablesBuilder({ resolve: invocables }), node.state);
+      var resolveData = function(parentLocals) {
+        var rewrap = function(_locals) {
+          return core.resolvablesBuilder({
+            resolve: core.mapObj(_locals, function(local) {
+              return function() {
+                return local;
+              };
+            }),
+          });
         };
-        return parent ? parent.then(resolveData) : resolveData({});
-    }
-};
-/** @hidden */
-var resolveFactory = function () { return $resolve; };
-// The old $resolve service
-angular.module('ui.router').factory('$resolve', resolveFactory);
+        context.addResolvables(rewrap(parentLocals), parentNode.state);
+        context.addResolvables(rewrap(locals), node.state);
+        var tuples2ObjR = function(acc, tuple) {
+          acc[tuple.token] = tuple.value;
+          return acc;
+        };
+        return context.resolvePath().then(function(results) {
+          return results.reduce(tuples2ObjR, {});
+        });
+      };
+      return parent ? parent.then(resolveData) : resolveData({});
+    },
+  };
+  /** @hidden */
+  var resolveFactory = function() {
+    return $resolve;
+  };
+  // The old $resolve service
+  angular.module('ui.router').factory('$resolve', resolveFactory);
 
-exports.resolveFactory = resolveFactory;
+  exports.resolveFactory = resolveFactory;
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+  Object.defineProperty(exports, '__esModule', { value: true });
+});
 //# sourceMappingURL=resolveService.js.map

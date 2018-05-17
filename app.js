@@ -5,7 +5,7 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/uploadps', { useMongoClient:true })
+mongoose.connect('mongodb://localhost/iv2', { useMongoClient:true })
 
 const entidade = require('./api/v1/routes/EntidadeRoutes')
 

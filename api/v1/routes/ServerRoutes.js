@@ -41,8 +41,8 @@ router.put('/', (req, res) => {
 });
 
 // Delete
-router.delete('/', (req, res) => {
-    const _id = req.body._id
+router.delete('/:_id', (req, res) => {
+    const _id = req.params._id
     ClienteModel.remove({ _id: _id }, (err, data) => {
         callback(res, err, data);
     });

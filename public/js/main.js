@@ -37,6 +37,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controllerAs: 'vm'
   })
 
+  .state('menu.cnsServer', {
+    url: '/servers',
+    templateUrl: '../partials/servers.html',
+    controller: 'ServerController',
+    controllerAs: 'vm'
+  })
+  
+
+  .state('menu.frmServer', {
+    url: '/server',
+    templateUrl: '../partials/server.html',
+    controller: 'ServerController',
+    controllerAs: 'vm'
+  })
+
+  .state('menu.frmServerEdit', {
+    url: '/server/:_id',
+    templateUrl: '../partials/server.html',
+    controller: 'ServerController',
+    controllerAs: 'vm'
+  })
+
   .state('menu.images', {
     url: '/images',
     templateUrl: '../partials/images.html',
