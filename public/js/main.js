@@ -6,7 +6,7 @@ app.value('APIHOST', window.location.protocol + '//' + window.location.host )
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/servers')
+  $urlRouterProvider.otherwise('/signin')
 
   $stateProvider
 
@@ -32,9 +32,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('menu.home', {
     url: '/home',
-    templateUrl: '../partials/home.html',
-    controller: 'ImageController',
-    controllerAs: 'vm'
+    templateUrl: '../partials/home.html'
   })
 
   .state('menu.cnsServer', {

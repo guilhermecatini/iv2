@@ -4,7 +4,7 @@ app.controller('UserController', function($http, $state, APIHOST){
 
   let vm = this
 
-  if (localStorage.getItem('userId') != null) {
+  if (localStorage.getItem('jsonwebtoken') != null) {
     $state.go('menu.home')
   }
 
@@ -30,12 +30,12 @@ app.controller('UserController', function($http, $state, APIHOST){
       method: 'POST',
       url: APIHOST + '/users/login',
       data: vm.User
-    }).then(function(data){
-      if (data.data == null) {
+    }).then(function(res){
+      if (res.data == null) {
         swal('Ooops', 'Your username or password is invalid', 'warning')
         vm.User.password = ''
       } else {
-        localStorage.setItem('userId', data.data._id)
+        localStorage.setItem('jsonwebtoken', res.data.token);
         swal({
           title: 'Yes!',
           text: 'You logged in!',
@@ -44,7 +44,7 @@ app.controller('UserController', function($http, $state, APIHOST){
           showConfirmButton: false
         }).then(function(result){
           swal.close()
-          $state.go('menu.home')
+          $state.go('menu.cnsServer');
         });
       }
     }, function(err){

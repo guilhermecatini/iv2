@@ -4,15 +4,25 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 
 	let vm = this;
 
+	// verifica se existe um token
+	const jsonwebtoken = localStorage.getItem('jsonwebtoken');
+	if (!jsonwebtoken) {
+		$state.go('signin');
+	}
+
 	vm.servers = [];
 
 	vm.server = {};
 
 
+
 	if ($stateParams._id) {
 		$http({
 			method: 'GET',
-			url: '/api/v1/server/' + $stateParams._id
+			url: '/api/v1/server/' + $stateParams._id,
+			headers: {
+				Authorization: jsonwebtoken
+			}
 		}).then(function (res) {
 			vm.server = res.data;
 		});
@@ -21,7 +31,10 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 	vm.ListAll = function () {
 		$http({
 			method: 'GET',
-			url: '/api/v1/server'
+			url: '/api/v1/server',
+			headers: {
+				Authorization: jsonwebtoken
+			}
 		}).then(function (res) {
 			vm.servers = res.data;
 		});
@@ -36,7 +49,10 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 			$http({
 				method: 'PUT',
 				url: '/api/v1/server',
-				data: vm.server
+				data: vm.server,
+				headers: {
+					Authorization: jsonwebtoken
+				}
 			}).then(function (res) {
 				swal('Sucesso', 'Registro salvo.', 'success');
 			});
@@ -44,7 +60,10 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 			$http({
 				method: 'POST',
 				url: '/api/v1/server',
-				data: vm.server
+				data: vm.server,
+				headers: {
+					Authorization: jsonwebtoken
+				}
 			}).then(function (res) {
 				swal('Sucesso', 'Registro salvo.', 'success');
 				$state.go('menu.frmServerEdit', { _id: res.data._id })
@@ -66,7 +85,10 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 			if (value == true) {
 				$http({
 					method: 'DELETE',
-					url: '/api/v1/server/' + vm.server._id
+					url: '/api/v1/server/' + vm.server._id,
+					headers: {
+						Authorization: jsonwebtoken
+					}
 				}).then(function (res) {
 					if (res.data.n > 0) {
 						swal('Sucesso', 'Registro removido.', 'success');
