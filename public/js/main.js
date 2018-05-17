@@ -6,7 +6,7 @@ app.value('APIHOST', window.location.protocol + '//' + window.location.host )
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/signin')
+  $urlRouterProvider.otherwise('/servers')
 
   $stateProvider
 
@@ -56,34 +56,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/server/:_id',
     templateUrl: '../partials/server.html',
     controller: 'ServerController',
-    controllerAs: 'vm'
-  })
-
-  .state('menu.images', {
-    url: '/images',
-    templateUrl: '../partials/images.html',
-    controller: 'ImageController',
-    controllerAs: 'vm'
-  })
-
-  .state('menu.cns-entidade', {
-    url: '/entidade/find',
-    templateUrl: '../partials/entidades.html',
-    controller: 'EntidadeController',
-    controllerAs: 'vm'
-  })
-
-  .state('menu.frm-entidade', {
-    url: '/entidade/:_id',
-    templateUrl: '../partials/entidade.html',
-    controller: 'EntidadeController',
-    controllerAs: 'vm'
-  })
-
-  .state('menu.frm-entidade-endereco', {
-    url: '/entidade/:_id/endereco',
-    templateUrl: '../partials/entidade-endereco.html',
-    controller: 'EntidadeController',
     controllerAs: 'vm'
   })
 
