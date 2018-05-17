@@ -1,0 +1,52 @@
+
+<div class="container-fluid">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-init="vm.getImages()">
+
+    <div class="row">
+
+      <!-- Modal Image -->
+      <div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" style="width: 100%" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <img class="img img-thumbnail" data-ng-src="{{vm.auximage}}">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3>Your Images</h3>
+        <hr>
+      </div>
+      
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" data-ng-repeat="img in vm.Images">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="col-xs-12">
+                <div class="row">
+                  <p style="font-size: 12px; text-align: center;"><a href="{{img.url}}" target="_blank">Abrir Imagem em Nova Aba</a></p>
+                  <img style="cursor: pointer;" class="img img-thumbnail" data-ng-src="{{img.url}}" data-ng-click="vm.auximage = img.url" onclick="$('#modalImage').modal('show');">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="row">
+                <hr />
+                <button data-ng-click="vm.removerImagem(img._id)" type="button" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-trash"></span> Remover Imagem</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+</div>

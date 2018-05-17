@@ -1,0 +1,67 @@
+<div class="container-fluid">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel panel-default panel-body">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label for="">Nome Completo</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.nome_completo" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">CPF</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.cpf" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">RG</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.rg" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">E-Mail Particular</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.email_particular" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Telefone Particular</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.telefone_particular" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">E-Mail Comercial</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.email_comercial" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Telefone Comercial</label>
+                <input type="text" class="form-control" data-ng-model="vm.entidade.telefone_comercial" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Cadastro Ativo?</label>
+                <select class="form-control" data-ng-model="vm.entidade.ativo">
+                    <option value="SIM">SIM</option>
+                    <option value="NAO">NÃO</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Data de Cadastro</label>
+                <input readonly="" type="text" class="form-control" data-ng-model="vm.data_cadastro" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <hr>
+
+                <button type="button" data-ng-click="vm.Gravar()" class="btn btn-default">Gravar</button>
+                <button type="button" data-ui-sref="menu.cns-entidade" class="btn btn-default">Voltar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

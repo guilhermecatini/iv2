@@ -1,0 +1,49 @@
+<div class="container-fluid">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel panel-default panel-body">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">CEP</label>
+                <input type="text" data-ng-blur="vm.BuscarCEP(vm.endereco.cep)" class="form-control" data-ng-model="vm.endereco.cep">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Logradouro</label>
+                <input type="text" class="form-control" data-ng-model="vm.endereco.logradouro">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                <label for="">Número</label>
+                <input type="text" class="form-control" data-ng-model="vm.endereco.numero">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Bairro</label>
+                <input type="text" class="form-control" data-ng-model="vm.endereco.bairro">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Localidade</label>
+                <input type="text" class="form-control" data-ng-model="vm.endereco.localidade">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                <label for="">Complemento</label>
+                <input type="text" class="form-control" data-ng-model="vm.endereco.complemento">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <label for="">Complemento</label>
+                <input type="text" class="form-control" data-ng-model="vm.endereco.uf">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <hr>
+                <button type="button" data-ng-click="vm.GravarEndereco()" class="btn btn-default">Gravar</button>
+            </div>
+        </div>
+    </div>
+
+</div>

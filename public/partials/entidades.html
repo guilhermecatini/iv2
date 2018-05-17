@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 panel panel-default panel-body" data-ng-init="vm.Listar()">
+
+        <div class="row">
+
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="button" data-ui-sref="menu.frm-entidade({_id:null})" class="btn btn-default">Novo Registro</button>
+                <hr>
+            </div>
+            
+
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome Completo</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="ax in vm.entidades">
+                            <td>{{ax.nome_completo}}</td>
+                            <td><a href="javascript:void(0)" data-ui-sref="menu.frm-entidade({_id:ax._id})">Editar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+
+        </div>
+
+    </div>
+</div>

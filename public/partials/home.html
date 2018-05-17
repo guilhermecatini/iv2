@@ -1,0 +1,57 @@
+<style type="text/css">
+ #divLoading
+ {
+  display : none;
+}
+#divLoading.show
+{
+  display : block;
+  position : fixed;
+  z-index: 100;
+  background-image : url('./img/loading.gif');
+  background-color: #FFF;
+  opacity : 0.5;
+  background-repeat : no-repeat;
+  background-position : center;
+  left : 0;
+  bottom : 0;
+  right : 0;
+  top : 0;
+}
+#loadinggif.show
+{
+  left : 50%;
+  top : 50%;
+  position : absolute;
+  z-index : 101;
+  width : 32px;
+  height : 32px;
+  margin-left : -16px;
+  margin-top : -16px;
+}
+div.content {
+  width : 1000px;
+  height : 1000px;
+}
+</style>
+
+<div id="divLoading" class="show" data-ng-show="vm.LOADING"></div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="jumbotron">
+      <div class="container">
+        <p>Após tirar o Print Screen, Pressione CTRL + V nessa página.</p>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" data-ng-show="vm.urlImagem">
+      <!-- <p style="font-weight: bold"><a href="{{vm.seuLink}}" target="_blank">Clique Aqui Para Abrir a Imagem</a></p> -->
+      <label>Clique no link para copiar</label>
+      <input style="text-align: center;" type="text" id="inputSeuLink" data-ng-model="vm.inputSeuLink" class="form-control" readonly="" />
+      <hr />
+      <img class="img img-thumbnail" data-ng-src="{{vm.urlImagem}}">
+    </div>
+  </div>
+</div>
