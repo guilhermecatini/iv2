@@ -13,7 +13,7 @@ app.controller('UserController', function($http, $state, APIHOST){
   vm.SignUp = function() {
     $http({
       method: 'POST',
-      url: APIHOST + '/users/create',
+      url: APIHOST + '/api/v1/user/create',
       data: vm.User
     }).then(function(data){
       swal('Congratulations!', 'Your account has created!', 'success')
@@ -28,7 +28,7 @@ app.controller('UserController', function($http, $state, APIHOST){
   vm.SignIn = function() {
     $http({
       method: 'POST',
-      url: APIHOST + '/users/login',
+      url: APIHOST + '/api/v1/user/login',
       data: vm.User
     }).then(function(res){
       if (res.data == null) {
