@@ -4,8 +4,8 @@ app.controller('UserController', function($http, $state, APIHOST){
 
   let vm = this
 
-  if (localStorage.getItem('jsonwebtoken') != null) {
-    $state.go('menu.home')
+  if (localStorage.getItem('jsonwebtoken') == null) {
+    $state.go('menu.signin')
   }
 
   vm.User = {}
@@ -31,7 +31,7 @@ app.controller('UserController', function($http, $state, APIHOST){
       url: APIHOST + '/api/v1/user/login',
       data: vm.User
     }).then(function(res){
-      if (res.data == null) {
+      if (res.data.error == true) {
         swal('Ooops', 'Your username or password is invalid', 'warning')
         vm.User.password = ''
       } else {
