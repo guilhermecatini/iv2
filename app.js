@@ -7,8 +7,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/iv2', { useMongoClient:true });
 
-const users = require('./api/v1/routes/UserRoutes');
-const servers = require('./api/v1/routes/ServerRoutes');
+const user = require('./api/v1/routes/UserRoutes');
+const server = require('./api/v1/routes/ServerRoutes');
+const provider = require('./api/v1/routes/ProviderRoutes');
 
 const app = express();
 
@@ -30,8 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1/user', users);
-app.use('/api/v1/server', servers);
+app.use('/api/v1/user', user);
+app.use('/api/v1/server', server);
+app.use('/api/v1/provider', provider);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

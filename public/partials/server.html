@@ -6,28 +6,34 @@
                 <div class="card-body">
                     <form>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="provider">Provedor</label>
-                                <input type="text" class="form-control" id="provider" data-ng-model="vm.server.provider">
+                                <!-- <input type="text" class="form-control" id="provider" data-ng-model="vm.server.provider"> -->
+                                <select class="form-control" data-ng-model="vm.server.provider" data-ng-options="ax._id as ax.name for ax in vm.providers">
+                                    <option>&nbsp;</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="servername">Nome do Servidor</label>
+                                <input type="text" class="form-control" id="servername" data-ng-model="vm.server.servername">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="serverlabel">Label do Servidor</label>
+                                <input type="text" class="form-control" id="serverlabel" data-ng-model="vm.server.serverlabel">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="ipv4">IPv4</label>
+                                <input type="text" class="form-control" id="ipv4" data-ng-model="vm.server.ipv4">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="ipv6">IPv6</label>
                                 <input type="text" class="form-control" id="ipv6" data-ng-model="vm.server.ipv6">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="ipv4">IPv4</label>
-                            <input type="text" class="form-control" id="ipv4" data-ng-model="vm.server.ipv4">
-                        </div>
-                        <div class="form-group">
-                            <label for="servername">Nome do Servidor</label>
-                            <input type="text" class="form-control" id="servername" data-ng-model="vm.server.servername">
-                        </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="serverlabel">Label do Servidor</label>
-                                <input type="text" class="form-control" id="serverlabel" data-ng-model="vm.server.serverlabel">
-                            </div>
                             <div class="form-group col-md-4">
                                 <label for="location">Localização</label>
                                 <input type="text" class="form-control" id="location" data-ng-model="vm.server.location">
@@ -36,35 +42,105 @@
                                 <label for="user">Usuário SSH</label>
                                 <input type="text" class="form-control" id="user" data-ng-model="vm.server.user">
                             </div>
-                        </div>
-                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="password">Senha SSH</label>
                                 <input type="text" class="form-control" id="password" data-ng-model="vm.server.password">
                             </div>
-                            <div class="form-group col-md-4">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
                                 <label for="vcpu">vCPU</label>
                                 <input type="text" class="form-control" id="vcpu" data-ng-model="vm.server.vcpu">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 <label for="ram">RAM</label>
                                 <input type="text" class="form-control" id="ram" data-ng-model="vm.server.ram">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="storage">Disco</label>
+                                <input type="text" class="form-control" id="storage" data-ng-model="vm.server.storage">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="bandwidth">Limite de Tráfego</label>
+                                <input type="text" class="form-control" id="bandwidth" data-ng-model="vm.server.bandwidth">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="storage">Disco</label>
-                                <input type="text" class="form-control" id="storage" data-ng-model="vm.server.storage">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="bandwidth">Velocidade Banda</label>
-                                <input type="text" class="form-control" id="bandwidth" data-ng-model="vm.server.bandwidth">
-                            </div>
-                            <div class="form-group col-md-2">
                                 <label for="os">OS</label>
                                 <input type="text" class="form-control" id="os" data-ng-model="vm.server.os">
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label>Usuários do Servidor</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-3">
+                                <input type="text" placeholder="Usuário" class="form-control" data-ng-model="user.user">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" placeholder="Senha" class="form-control" data-ng-model="user.password">
+                            </div>
+                            <div class="col-3">
+                                <select class="form-control" data-ng-model="user.accesstype">
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Desenvolvedor">Desenvolvedor</option>
+                                    <option value="Somente Leitura">Somente Leitura</option>
+                                </select>
+                            </div>
+                            <div class="col-3 text-center">
+                                <button type="button" data-ng-click="vm.AddUser(user); user={};" class="btn btn-dark">Adicionar Usuário</button>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-12">
+                                <br />
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Usuário</th>
+                                            <th scope="col">Senha</th>
+                                            <th scope="col">Tipo de Acesso</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-ng-repeat="ax in vm.server.users">
+                                            <td>
+                                                <input type="text" data-ng-model="ax.user" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input type="text" data-ng-model="ax.password" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <select class="form-control" data-ng-model="ax.accesstype">
+                                                    <option value="Administrador">Administrador</option>
+                                                    <option value="Desenvolvedor">Desenvolvedor</option>
+                                                    <option value="Somente Leitura">Somente Leitura</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <i style="cursor: pointer" class="fas fa-save" data-ng-click="vm.UpdateUser(ax)"></i>
+                                                <i style="cursor: pointer" class="fas fa-trash" data-ng-click="vm.DeleteUser(ax._id)"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
                         <div class="form-row">
                             <div class="col-6">
                                 <button type="button" class="btn btn-info" data-ng-click="vm.Save()">Gravar</button>
@@ -74,7 +150,6 @@
                                 <button type="button" class="btn btn-danger" data-ng-click="vm.Delete()">Apagar</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-const router = require('./SecurityRoutes')();
+const router = require('./SecurityRoutes')(false);
 const ClienteModel = require('../models/ServerModel');
 
 
@@ -13,6 +13,19 @@ router.post('/', (req, res) => {
     ClienteModel.create(body, (err, data) => {
         callback(res, err, data);
     });
+});
+
+router.post('/:_id/user', (req, res) => {
+    const _id = req.params._id;
+    const body = req.body;
+    ClienteModel.findOneAndUpdate({ _id: _id }, { $push: { users: body } }, (err, data) => {
+        if (err) {
+            callback(res, err, data);
+        }
+        ClienteModel.findOne({ _id: _id }, (err, data) => {
+            callback(res, err, data);
+        });
+    })
 });
 
 // Retrieve
@@ -39,12 +52,35 @@ router.put('/', (req, res) => {
     });
 });
 
+router.put('/:_id/user/:_idUser', (req, res) => {
+    const _id = req.params._id;
+    const _idUser = req.params._idUser;
+    const body = req.body;
+    ClienteModel.updateOne({ _id: _id, 'users._id': _idUser }, { $set: { users: body } }, (err, data) => {
+        callback(res, err, data);
+    });
+});
+
 // Delete
 router.delete('/:_id', (req, res) => {
     const _id = req.params._id
     ClienteModel.remove({ _id: _id }, (err, data) => {
         callback(res, err, data);
     });
+});
+
+router.delete('/:_id/user/:_idUser', (req, res) => {
+    const _id = req.params._id;
+    const _idUser = req.params._idUser;
+    const body = req.body;
+    ClienteModel.findOneAndUpdate({ _id: _id }, { $pull: { users: { _id: _idUser } } }, (err, data) => {
+        if (err) {
+            callback(res, err, data);
+        }
+        ClienteModel.findOne({ _id: _id }, (err, data) => {
+            callback(res, err, data);
+        });
+    })
 });
 
 module.exports = router;

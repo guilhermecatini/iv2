@@ -11,15 +11,25 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 	}
 
 	vm.servers = [];
+	vm.providers = [];
 
 	vm.server = {};
 
+	// getProviders
+	$http({
+		method: 'GET',
+		url: '/api/v1/provider',
+		headers: {
+			Authorization: jsonwebtoken
+		}
+	}).then(function (res) {
+		vm.providers = res.data;
+	});
 
-
-	if ($stateParams._id) {
+	vm.ListOne = function (_id) {
 		$http({
 			method: 'GET',
-			url: '/api/v1/server/' + $stateParams._id,
+			url: '/api/v1/server/' + _id,
 			headers: {
 				Authorization: jsonwebtoken
 			}
@@ -27,7 +37,11 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 			vm.server = res.data;
 		});
 	}
+	if ($stateParams._id) {
+		vm.ListOne($stateParams._id);
+	}
 
+	// listar todos os servidores
 	vm.ListAll = function () {
 		$http({
 			method: 'GET',
@@ -37,6 +51,21 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 			}
 		}).then(function (res) {
 			vm.servers = res.data;
+		});
+	}
+
+	// add usuário
+	vm.AddUser = function (user) {
+		$http({
+			method: 'POST',
+			url: '/api/v1/server/' + $stateParams._id + '/user',
+			data: user,
+			headers: {
+				Authorization: jsonwebtoken
+			}
+		}).then(function (res) {
+			vm.servers = res.data;
+			vm.ListOne($stateParams._id);
 		});
 	}
 
@@ -71,6 +100,7 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 		}
 	}
 
+	// remover um servidor
 	vm.Delete = function () {
 
 		swal({
@@ -99,4 +129,29 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 		});
 	}
 
+	// remover um usuário do servidor
+	vm.DeleteUser = function (idUser) {
+
+		swal({
+			icon: 'info',
+			title: 'Atenção',
+			text: 'Deseja remover o registro?',
+			buttons: {
+				cancel: 'Não',
+				confirm: 'Sim'
+			},
+		}).then(function (value) {
+			if (value == true) {
+				$http({
+					method: 'DELETE',
+					url: '/api/v1/server/' + vm.server._id + '/user/' + idUser,
+					headers: {
+						Authorization: jsonwebtoken
+					}
+				}).then(function (res) {
+					vm.ListOne($stateParams._id);
+				});
+			}
+		});
+	}
 })
