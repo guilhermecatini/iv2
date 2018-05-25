@@ -14,7 +14,14 @@ const _schema = {
   ram: String,
   storage: String,
   bandwidth: String,
-  os: String
+  os: String,
+  users: [
+    {
+      user: String,
+      password: String,
+      accesstype: String
+    }
+  ]
 }
 
 const ServerSchema = new Schema(_schema, { versionKey:false })

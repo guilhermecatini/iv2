@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ServerController', function ($http, $stateParams, $state) {
+app.controller('ServerController', function ($http, $stateParams, $state, $scope) {
 
 	let vm = this;
 
@@ -11,15 +11,26 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 	}
 
 	vm.servers = [];
+	vm.providers = [];
 
 	vm.server = {};
+	vm.server.users = [];
 
+	// getProviders
+	$http({
+		method: 'GET',
+		url: '/api/v1/provider',
+		headers: {
+			Authorization: jsonwebtoken
+		}
+	}).then(function (res) {
+		vm.providers = res.data;
+	});
 
-
-	if ($stateParams._id) {
+	vm.ListOne = function (_id) {
 		$http({
 			method: 'GET',
-			url: '/api/v1/server/' + $stateParams._id,
+			url: '/api/v1/server/' + _id,
 			headers: {
 				Authorization: jsonwebtoken
 			}
@@ -27,7 +38,11 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 			vm.server = res.data;
 		});
 	}
+	if ($stateParams._id) {
+		vm.ListOne($stateParams._id);
+	}
 
+	// listar todos os servidores
 	vm.ListAll = function () {
 		$http({
 			method: 'GET',
@@ -38,6 +53,11 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 		}).then(function (res) {
 			vm.servers = res.data;
 		});
+	}
+
+	// add usuário
+	vm.AddUser = function (user) {
+		vm.server.users.push(user);
 	}
 
 	vm.Open = function (data) {
@@ -71,8 +91,8 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 		}
 	}
 
+	// remover um servidor
 	vm.Delete = function () {
-
 		swal({
 			icon: 'info',
 			title: 'Atenção',
@@ -99,4 +119,22 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 		});
 	}
 
+	// remover um usuário do servidor
+	vm.DeleteUser = function (idUser) {
+		swal({
+			icon: 'info',
+			title: 'Atenção',
+			text: 'Deseja remover o registro?',
+			buttons: {
+				cancel: 'Não',
+				confirm: 'Sim'
+			},
+		}).then(function (value) {
+			if (value === true) {
+				let userIndex = vm.server.users.map(function (e) { return e._id }).indexOf(idUser);
+				vm.server.users.splice(userIndex, 1);
+				$scope.$apply();
+			}
+		});
+	}
 })
