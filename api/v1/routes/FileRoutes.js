@@ -57,7 +57,7 @@ router.get('/byServerId/:_serverid', (req, res) => {
     });
 });
 
-// Update
+// Updatee
 router.put('/', (req, res) => {
     const body = req.body;
     const _id = body._id;
