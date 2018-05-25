@@ -145,24 +145,29 @@
                             <div class="col-12">
                                 <hr>
                                 <h4>Arquivos</h4>
+                                <input type="file" style="display: none;" name="file_upload" id="file_upload" />
+                                <button type="button" class="btn btn-info btn-sm" href="javascript:void(0)" onclick="$('#file_upload').trigger('click')">Enviar Arquivo</button>
+                                <hr />
                             </div>
 
-                            <table class="table">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th></th>
-                                        <th>Nome do Arquivo</th>
-                                        <th>Download</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr data-ng-repeat="ax in vm.serverfiles">
-                                        <th class="text-center"><i style="cursor: pointer;" class="fas fa-trash" data-ng-click="vm.RemoveServerDocument(ax._id)"></i></th>
-                                        <th>{{ax.filename}}</th>
-                                        <th><a href="{{ax.fileurl}}" download>Download</a></th>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="col-12">
+                                <table class="table">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th></th>
+                                            <th>Nome do Arquivo</th>
+                                            <th>Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-ng-repeat="ax in vm.serverfiles">
+                                            <th class="text-center"><i style="cursor: pointer;" class="fas fa-trash" data-ng-click="vm.RemoveServerDocument(ax._id)"></i></th>
+                                            <th>{{ax.filename}}</th>
+                                            <th><a href="{{ax.fileurl}}" download>Download</a></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 
