@@ -22,29 +22,30 @@
                                 <input type="text" class="form-control" id="serverlabel" data-ng-model="vm.server.serverlabel">
                             </div>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="ipv4">IPv4</label>
-                                <input type="text" class="form-control" id="ipv4" data-ng-model="vm.server.ipv4">
+                                <label for="private_ipv4">IPv4 Privado</label>
+                                <input type="text" class="form-control" id="private_ipv4" data-ng-model="vm.server.private_ipv4">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="ipv6">IPv6</label>
-                                <input type="text" class="form-control" id="ipv6" data-ng-model="vm.server.ipv6">
+                                <label for="private_ipv6">IPv6 Privado</label>
+                                <input type="text" class="form-control" id="private_ipv6" data-ng-model="vm.server.private_ipv6">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="public_ipv4">IPv4 Público</label>
+                                <input type="text" class="form-control" id="public_ipv4" data-ng-model="vm.server.public_ipv4">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="public_ipv6">IPv6 Público</label>
+                                <input type="text" class="form-control" id="public_ipv6" data-ng-model="vm.server.public_ipv6">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="location">Localização</label>
                                 <input type="text" class="form-control" id="location" data-ng-model="vm.server.location">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="user">Usuário SSH</label>
-                                <input type="text" class="form-control" id="user" data-ng-model="vm.server.user">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="password">Senha SSH</label>
-                                <input type="text" class="form-control" id="password" data-ng-model="vm.server.password">
                             </div>
                         </div>
                         <div class="form-row">
