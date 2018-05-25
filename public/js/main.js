@@ -1,63 +1,71 @@
 'use strict'
 
-const app = angular.module('MyApp', ['ui.router'])
+const app = angular.module('MyApp', ['ui.router', 'angular-loading-bar']);
 
-app.value('APIHOST', window.location.protocol + '//' + window.location.host )
+app.value('APIHOST', window.location.protocol + '//' + window.location.host);
 
-app.config(function($stateProvider, $urlRouterProvider) {
+// configurações de rotas
+app.config(function ($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/signin')
+	$urlRouterProvider.otherwise('/signin')
 
-  $stateProvider
+	$stateProvider
 
-  .state('signup', {
-    url: '/signup',
-    templateUrl: '../partials/signup.html',
-    controller: 'UserController',
-    controllerAs: 'vm'
-  })
+		.state('signup', {
+			url: '/signup',
+			templateUrl: '../partials/signup.html',
+			controller: 'UserController',
+			controllerAs: 'vm'
+		})
 
-  .state('signin', {
-    url: '/signin',
-    templateUrl: '../partials/signin.html',
-    controller: 'UserController',
-    controllerAs: 'vm'
-  })
+		.state('signin', {
+			url: '/signin',
+			templateUrl: '../partials/signin.html',
+			controller: 'UserController',
+			controllerAs: 'vm'
+		})
 
-  .state('menu', {
-    templateUrl: '../partials/menu.html',
-    controller: 'UserController',
-    controllerAs: 'vm'
-  })
+		.state('menu', {
+			templateUrl: '../partials/menu.html',
+			controller: 'UserController',
+			controllerAs: 'vm'
+		})
 
-  .state('menu.home', {
-    url: '/home',
-    templateUrl: '../partials/home.html'
-  })
+		.state('menu.home', {
+			url: '/home',
+			templateUrl: '../partials/home.html'
+		})
 
-  .state('menu.cnsServer', {
-    url: '/servers',
-    templateUrl: '../partials/servers.html',
-    controller: 'ServerController',
-    controllerAs: 'vm'
-  })
-  
-
-  .state('menu.frmServer', {
-    url: '/server',
-    templateUrl: '../partials/server.html',
-    controller: 'ServerController',
-    controllerAs: 'vm'
-  })
-
-  .state('menu.frmServerEdit', {
-    url: '/server/:_id',
-    templateUrl: '../partials/server.html',
-    controller: 'ServerController',
-    controllerAs: 'vm'
-  })
+		.state('menu.cnsServer', {
+			url: '/servers',
+			templateUrl: '../partials/servers.html',
+			controller: 'ServerController',
+			controllerAs: 'vm'
+		})
 
 
+		.state('menu.frmServer', {
+			url: '/server',
+			templateUrl: '../partials/server.html',
+			controller: 'ServerController',
+			controllerAs: 'vm'
+		})
+
+		.state('menu.frmServerEdit', {
+			url: '/server/:_id',
+			templateUrl: '../partials/server.html',
+			controller: 'ServerController',
+			controllerAs: 'vm'
+		})
 
 
-})
+
+
+});
+
+// configuração da barra de latência
+app.config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+	cfpLoadingBarProvider.latencyThreshold = 200;
+	cfpLoadingBarProvider.includeBar = true;
+	cfpLoadingBarProvider.includeSpinner = true;
+}]);

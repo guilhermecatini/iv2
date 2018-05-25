@@ -1,4 +1,4 @@
-const router = require('./SecurityRoutes')(true);
+const router = require('./SecurityRoutes')(globalParams.protectRoutes);
 const FileRoutes = require('../models/FileModel');
 const fs = require('fs');
 
@@ -74,14 +74,21 @@ router.delete('/:_id', (req, res) => {
         if (err)
             callback(res, err, data);
 
-        fs.unlink(data.fileurl, (err) => {
-            if (err)
-                callback(res, err, data);
-
+        // verifica se a pasta existe
+        if (!fs.existsSync(data.fileurl)) {
             FileRoutes.remove({ _id: _id }, (err, data) => {
                 callback(res, err, data);
             });
-        });
+        } else {
+            fs.unlink(data.fileurl, (err) => {
+                if (err)
+                    callback(res, err, data);
+
+                FileRoutes.remove({ _id: _id }, (err, data) => {
+                    callback(res, err, data);
+                });
+            });
+        }
     });
 });
 

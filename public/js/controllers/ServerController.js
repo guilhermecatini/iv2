@@ -40,6 +40,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			vm.server = res.data;
 		});
 	}
+	vm.stateParams = $stateParams;
 	if ($stateParams._id) {
 		vm.ListOne($stateParams._id);
 	}
@@ -79,9 +80,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		vm.server.users.push(user);
 	}
 
-	vm.Open = function (data) {
-	}
-
+	// Grava o Formulário
 	vm.Save = function () {
 		if ($stateParams._id) {
 			$http({
@@ -93,6 +92,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 				}
 			}).then(function (res) {
 				swal('Sucesso', 'Registro salvo.', 'success');
+				vm.ListOne($stateParams._id);
 			});
 		} else {
 			$http({
@@ -138,7 +138,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 	}
 
 	// remover um usuário do servidor
-	vm.DeleteUser = function (idUser) {
+	vm.DeleteUser = function (user) {
 		swal({
 			icon: 'info',
 			title: 'Atenção',
@@ -149,9 +149,15 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			},
 		}).then(function (value) {
 			if (value === true) {
-				let userIndex = vm.server.users.map(function (e) { return e._id }).indexOf(idUser);
-				vm.server.users.splice(userIndex, 1);
-				$scope.$apply();
+				if (user._id) {
+					let userIndex = vm.server.users.map(function (e) { return e._id }).indexOf(user._id);
+					vm.server.users.splice(userIndex, 1);
+					$scope.$apply();
+				} else {
+					let userIndex = vm.server.users.map(function (e) { return e.$$hashKey }).indexOf(user.$$hashKey);
+					vm.server.users.splice(userIndex, 1);
+					$scope.$apply();
+				}
 			}
 		});
 	}

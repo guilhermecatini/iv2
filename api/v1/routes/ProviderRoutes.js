@@ -1,4 +1,4 @@
-const router = require('./SecurityRoutes')(true);
+const router = require('./SecurityRoutes')(globalParams.protectRoutes);
 const ProviderModel = require('../models/ProviderModel');
 
 
