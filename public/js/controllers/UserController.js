@@ -4,6 +4,8 @@ app.controller('UserController', function($http, $state, APIHOST){
 
   let vm = this
 
+  vm.year = new Date().getUTCFullYear();
+
   if (localStorage.getItem('jsonwebtoken') == null) {
     $state.go('menu.signin')
   }
@@ -37,9 +39,9 @@ app.controller('UserController', function($http, $state, APIHOST){
       } else {
         localStorage.setItem('jsonwebtoken', res.data.token);
         swal({
-          title: 'Yes!',
-          text: 'You logged in!',
-          type: 'success',
+          title: 'Sucesso',
+          text: 'Você será redirecionado',
+          icon: 'success',
           timer: 2000,
           showConfirmButton: false
         }).then(function(result){
@@ -56,9 +58,9 @@ app.controller('UserController', function($http, $state, APIHOST){
   vm.SignOut = function() {
     localStorage.clear()
     swal({
-      title: 'Bye!',
-      text: 'You logged out!',
-      type: 'success',
+      title: 'Saindo...',
+      text: 'Você será redirecionado',
+      icon: 'success',
       timer: 2000,
       showConfirmButton: false
     }).then(function(result){
