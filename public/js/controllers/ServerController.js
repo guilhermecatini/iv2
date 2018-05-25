@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ServerController', function ($http, $stateParams, $state) {
+app.controller('ServerController', function ($http, $stateParams, $state, $scope) {
 
 	let vm = this;
 
@@ -14,6 +14,7 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 	vm.providers = [];
 
 	vm.server = {};
+	vm.server.users = [];
 
 	// getProviders
 	$http({
@@ -56,17 +57,7 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 
 	// add usuário
 	vm.AddUser = function (user) {
-		$http({
-			method: 'POST',
-			url: '/api/v1/server/' + $stateParams._id + '/user',
-			data: user,
-			headers: {
-				Authorization: jsonwebtoken
-			}
-		}).then(function (res) {
-			vm.servers = res.data;
-			vm.ListOne($stateParams._id);
-		});
+		vm.server.users.push(user);
 	}
 
 	vm.Open = function (data) {
@@ -102,7 +93,6 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 
 	// remover um servidor
 	vm.Delete = function () {
-
 		swal({
 			icon: 'info',
 			title: 'Atenção',
@@ -131,7 +121,6 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 
 	// remover um usuário do servidor
 	vm.DeleteUser = function (idUser) {
-
 		swal({
 			icon: 'info',
 			title: 'Atenção',
@@ -141,16 +130,10 @@ app.controller('ServerController', function ($http, $stateParams, $state) {
 				confirm: 'Sim'
 			},
 		}).then(function (value) {
-			if (value == true) {
-				$http({
-					method: 'DELETE',
-					url: '/api/v1/server/' + vm.server._id + '/user/' + idUser,
-					headers: {
-						Authorization: jsonwebtoken
-					}
-				}).then(function (res) {
-					vm.ListOne($stateParams._id);
-				});
+			if (value === true) {
+				let userIndex = vm.server.users.map(function (e) { return e._id }).indexOf(idUser);
+				vm.server.users.splice(userIndex, 1);
+				$scope.$apply();
 			}
 		});
 	}
