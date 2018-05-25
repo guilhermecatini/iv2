@@ -11,13 +11,13 @@ function callback(res, err, data) {
 	res.status(200).json(data)
 }
 
-// router.post('/create', (req, res) => {
-// 	const body = req.body
-// 	body.password = crypto.createHash('md5').update(body.password).digest('hex');
-// 	UserModel.create(body, (err, data) => {
-// 		callback(res, err, data)
-// 	})
-// });
+router.post('/create', (req, res) => {
+	const body = req.body
+	body.password = crypto.createHash('md5').update(body.password).digest('hex');
+	UserModel.create(body, (err, data) => {
+		callback(res, err, data)
+	})
+});
 
 // router.get('/retrieve', (req, res) => {
 // 	UserModel.findOne({}, (err, data) => {

@@ -20,7 +20,8 @@ const _schema = {
     required: true,
     type: String,
     minlength: 4
-  }
+  },
+  name: String
 }
 
 const UserSchema = new Schema(_schema, { versionKey:false })
