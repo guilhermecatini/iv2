@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/iv2', { useMongoClient:true });
 const user = require('./api/v1/routes/UserRoutes');
 const server = require('./api/v1/routes/ServerRoutes');
 const provider = require('./api/v1/routes/ProviderRoutes');
+const file = require('./api/v1/routes/FileRoutes');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/user', user);
 app.use('/api/v1/server', server);
 app.use('/api/v1/provider', provider);
+app.use('/api/v1/file', file);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

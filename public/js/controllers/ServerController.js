@@ -16,6 +16,8 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 	vm.server = {};
 	vm.server.users = [];
 
+	vm.serverfiles = [];
+
 	// getProviders
 	$http({
 		method: 'GET',
@@ -52,6 +54,23 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			}
 		}).then(function (res) {
 			vm.servers = res.data;
+		});
+	}
+
+	// listar todos os arquivos do servidor
+	vm.ListAllDocuments = function () {
+		$http({
+			method: 'GET',
+			url: '/api/v1/file/byServerId/' + $stateParams._id,
+			headers: {
+				Authorization: jsonwebtoken
+			}
+		}).then(function (res) {
+			vm.serverfiles = [];
+			res.data.forEach(function(v){
+				v.fileurl = v.fileurl.substr(8);
+				vm.serverfiles.push(v);
+			});
 		});
 	}
 
@@ -136,4 +155,29 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			}
 		});
 	}
+
+	$('#file_upload').change(function () {
+		let file = $(this)[0].files[0];
+		let reader = new FileReader();
+		let filename = file.name.split(' ').join('-');
+
+		reader.onload = function (fl) {
+			let base64 = fl.target.result.split(';')[1].split(',')[1];
+
+			$http({
+				method: 'POST',
+				url: '/api/v1/file',
+				data: {
+					_serverid: vm.server._id,
+					filename: filename,
+					base64: base64
+				}
+			}).then(function () {
+				vm.ListAllDocuments();
+			});
+		}
+
+		reader.readAsDataURL(file);
+	});
+
 })

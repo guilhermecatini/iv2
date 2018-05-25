@@ -141,8 +141,45 @@
                         </div>
 
 
+                        <div class="row" data-ng-init="vm.ListAllDocuments()">
+                            <div class="col-12">
+                                <hr>
+                                <h4>Arquivos</h4>
+                            </div>
+
+                            <input type="file" style="display: none;" name="file_upload" id="file_upload" />
+
+                            <div class="col-3">
+                                <div class="card">
+                                    <div class="col-12" style="padding: 15px;">
+                                        <div class="text-center">
+                                            <i style="cursor:pointer;" class="fas fa-5x fa-plus-circle" onclick="$('#file_upload').trigger('click')"></i>
+                                            <br />
+                                            <span><a href="javascript:void(0)" onclick="$('#file_upload').trigger('click')">Upload de Arquivo</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3" data-ng-repeat="ax in vm.serverfiles" style="margin-bottom: 10px;">
+                                <div class="card">
+                                    <div class="col-12" style="padding: 15px;">
+                                        <div class="text-center">
+                                            <i style="cursor:pointer;" class="fas fa-5x fa-download"></i>
+                                            <br />
+                                            <span><a href="{{ax.fileurl}}" download>{{ax.filename}}</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
 
                         <div class="form-row">
+                            <div class="col-12">
+                                <hr />
+                            </div>
                             <div class="col-6">
                                 <button type="button" class="btn btn-info" data-ng-click="vm.Save()">Gravar</button>
                                 <button type="button" class="btn btn-info" ui-sref="menu.cnsServer">Voltar</button>
