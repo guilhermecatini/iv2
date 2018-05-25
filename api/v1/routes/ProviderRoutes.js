@@ -1,4 +1,4 @@
-const router = require('./SecurityRoutes')(false);
+const router = require('./SecurityRoutes')(true);
 const ProviderModel = require('../models/ProviderModel');
 
 

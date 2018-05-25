@@ -6,10 +6,7 @@ const validate = (security = true) => {
 	const express = require('express');
 	const router = express.Router();
 
-	console.log(security)
-
 	if (security === true) {
-		console.log('entrou');
 		// antes de retornar a rota do express, valida o token
 		router.use((req, res, next) => {
 			const authorization = req.headers.authorization;

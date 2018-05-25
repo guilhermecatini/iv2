@@ -1,4 +1,4 @@
-const router = require('./SecurityRoutes')(false);
+const router = require('./SecurityRoutes')(true);
 const ProviderRoutes = require('../models/ServerModel');
 
 
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     ProviderRoutes.find({}, (err, data) => {
         callback(res, err, data);
-    });
+    }).populate('provider');
 });
 
 router.get('/:_id', (req, res) => {

@@ -19,7 +19,7 @@
                 <tbody>
                     <tr data-ng-repeat="ax in vm.servers" style="cursor: pointer;" ui-sref="menu.frmServerEdit({_id: ax._id})">
                         <td>{{ax.os}}</td>
-                        <td>{{ax.provider}}</td>
+                        <td>{{ax.provider.name}}</td>
                         <td>{{ax.ipv4}}</td>
                         <td>{{ax.serverlabel}}</td>
                         <td>{{ax.location}}</td>

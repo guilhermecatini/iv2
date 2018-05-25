@@ -61,7 +61,6 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 	}
 
 	vm.Open = function (data) {
-		console.log(data);
 	}
 
 	vm.Save = function () {

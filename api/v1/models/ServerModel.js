@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const _schema = {
-  provider: String,
+  provider: {
+    type: Schema.Types.ObjectId,
+    ref: 'provider'
+  },
   ipv4: String,
   ipv6: String,
   servername: String,
