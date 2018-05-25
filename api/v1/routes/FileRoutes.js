@@ -70,8 +70,18 @@ router.put('/', (req, res) => {
 // Delete
 router.delete('/:_id', (req, res) => {
     const _id = req.params._id
-    FileRoutes.remove({ _id: _id }, (err, data) => {
-        callback(res, err, data);
+    FileRoutes.findOne({ _id: _id }, (err, data) => {
+        if (err)
+            callback(res, err, data);
+
+        fs.unlink(data.fileurl, (err) => {
+            if (err)
+                callback(res, err, data);
+
+            FileRoutes.remove({ _id: _id }, (err, data) => {
+                callback(res, err, data);
+            });
+        });
     });
 });
 

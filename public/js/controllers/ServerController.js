@@ -67,7 +67,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			}
 		}).then(function (res) {
 			vm.serverfiles = [];
-			res.data.forEach(function(v){
+			res.data.forEach(function (v) {
 				v.fileurl = v.fileurl.substr(8);
 				vm.serverfiles.push(v);
 			});
@@ -153,6 +153,30 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 				vm.server.users.splice(userIndex, 1);
 				$scope.$apply();
 			}
+		});
+	}
+
+	// remover um documento do servidor
+	vm.RemoveServerDocument = function (idDocument) {
+		swal({
+			icon: 'info',
+			title: 'Atenção',
+			text: 'Deseja remover o registro?',
+			buttons: {
+				cancel: 'Não',
+				confirm: 'Sim'
+			},
+		}).then(function (value) {
+			$http({
+				method: 'DELETE',
+				url: '/api/v1/file/' + idDocument,
+				headers: {
+					Authorization: jsonwebtoken
+				}
+			}).then(function (res) {
+				console.log(res.data)
+				vm.ListAllDocuments();
+			});
 		});
 	}
 
