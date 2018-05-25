@@ -167,6 +167,9 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			$http({
 				method: 'POST',
 				url: '/api/v1/file',
+				headers: {
+					Authorization: jsonwebtoken
+				},
 				data: {
 					_serverid: vm.server._id,
 					filename: filename,
