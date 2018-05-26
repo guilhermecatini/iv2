@@ -1,5 +1,6 @@
 const globalParams = {
-    protectRoutes: true, // proteger rotas com jsonwebtoken
+    accessPort: 8889,
+    protectRoutes: true, 
     enableRegisterUsers: false
 }
 
