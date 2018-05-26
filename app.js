@@ -5,9 +5,10 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/iv2', { useMongoClient: true });
 
 globalParams = require('./systemparams');
+
+mongoose.connect('mongodb://localhost/'+globalParams.dataBaseName, { useMongoClient: true });
 
 const user = require('./api/v1/routes/UserRoutes');
 const server = require('./api/v1/routes/ServerRoutes');
