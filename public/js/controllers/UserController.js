@@ -15,16 +15,13 @@ app.controller('UserController', function($http, $state, APIHOST){
   vm.SignUp = function() {
     $http({
       method: 'POST',
-      url: APIHOST + '/api/v1/user/create',
+      url: APIHOST + '/api/v1/user',
       data: vm.User
     }).then(function(data){
-      swal('Congratulations!', 'Your account has created!', 'success')
-      vm.User = {}
-      $state.go('signin')
-    }, function(err){
-      swal('Error', 'Contact App Administrator', 'error')
-      console.log(err.data.errmsg)
-    })
+      swal('OK', 'Sua conta foi criada', 'success');
+      vm.User = {};
+      $state.go('signin');
+    });
   }
 
   vm.SignIn = function() {

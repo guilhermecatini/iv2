@@ -11,13 +11,14 @@ function callback(res, err, data) {
 	res.status(200).json(data)
 }
 
-// router.post('/create', (req, res) => {
-// 	const body = req.body
-// 	body.password = crypto.createHash('md5').update(body.password).digest('hex');
-// 	UserModel.create(body, (err, data) => {
-// 		callback(res, err, data)
-// 	})
-// });
+// create
+router.post('/', (req, res) => {
+	const body = req.body
+	body.password = crypto.createHash('md5').update(body.password).digest('hex');
+	UserModel.create(body, (err, data) => {
+		callback(res, err, data)
+	})
+});
 
 // router.get('/retrieve', (req, res) => {
 // 	UserModel.findOne({}, (err, data) => {
@@ -48,11 +49,11 @@ router.post('/login', (req, res) => {
 	UserModel.findOne(query, (err, data) => {
 		//const remoteAddress = req._remoteAddress;
 		if (data != null) {
-			jwt.sign({}, superSecret, { algorithm: 'HS512', expiresIn: (60*60*8) }, (err, token) => {
-				res.json({error: false, message: 'OK', token: token});
+			jwt.sign({}, superSecret, { algorithm: 'HS512', expiresIn: (60 * 60 * 8) }, (err, token) => {
+				res.json({ error: false, message: 'OK', token: token });
 			});
 		} else {
-			res.json({error: true, message: 'Usuário ou senha inválida'});
+			res.json({ error: true, message: 'Usuário ou senha inválida' });
 		}
 	})
 })

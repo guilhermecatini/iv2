@@ -1,5 +1,5 @@
 const globalParams = {
-    protectRoutes: false // proteger rotas com jsonwebtoken
+    protectRoutes: true // proteger rotas com jsonwebtoken
 }
 
 module.exports = globalParams;

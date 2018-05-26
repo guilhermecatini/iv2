@@ -1,32 +1,37 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6" style="margin-top: 25px">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">SignUp</h3>
-        </div>
-        <div class="panel-body">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <label for="">E-Mail</label>
-            <input type="text" class="form-control" data-ng-model="vm.User.email">
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <label for="">Username</label>
-            <input type="text" class="form-control" data-ng-model="vm.User.user">
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <label for="">Password</label>
-            <input type="password" class="form-control" data-ng-model="vm.User.password">
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <hr>
-            <button type="button" class="btn btn-default btn-block" data-ng-click="vm.SignUp()">Sign Up!</button>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
-            <p style="margin-top: 15px;">Your have account? <strong><a href="javascript:void(0)" ui-sref="signin">Sign In!</a></strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-12 col-sm-12 offset-md-3 col-md-6 offset-lg-3 col-lg-6" style="margin-top: 25px;">
+			<div class="col-12 text-center">
+				<img style="width: 100px;" src="http://iv2.com.br/assets/img/logo.png" alt="http://iv2.com.br/assets/img/logo.png">
+				<br>
+				<span style="font-size: 40px; font-family: Ubuntu">Grupo iv2</span>
+			</div>
+			<form name="register" autocomplete="off">
+				<div class="card" style="margin-top: 30px;">
+					<div class="card-body">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<label for="">Nome</label>
+							<input type="text" class="form-control" data-ng-model="vm.User.name">
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<label for="">Email</label>
+							<input type="text" class="form-control" data-ng-model="vm.User.email">
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<label for="">Usuário</label>
+							<input type="text" class="form-control" data-ng-model="vm.User.user">
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<label for="">Senha</label>
+							<input type="password" class="form-control" data-ng-model="vm.User.password">
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<hr>
+							<button type="button" class="btn btn-info btn-block" data-ng-click="vm.SignUp()">Cadastrar</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

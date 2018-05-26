@@ -41,10 +41,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		});
 	}
 	vm.stateParams = $stateParams;
-	if ($stateParams._id) {
-		vm.ListOne($stateParams._id);
-	}
-
+	
 	// listar todos os servidores
 	vm.ListAll = function () {
 		$http({
@@ -74,6 +71,13 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			});
 		});
 	}
+
+	// caso estiver em um registro
+	if ($stateParams._id) {
+		vm.ListOne($stateParams._id);
+		vm.ListAllDocuments();
+	}
+	
 
 	// add usuário
 	vm.AddUser = function (user) {

@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12" style="margin-top: 25px;">
+
+			<div class="card">
+				<div class="card-body">
+					<form>
+						<div class="row">
+							<div class="col-6">
+								<h5 class="card-title">Cadastro de Provedores</h5>
+							</div>
+							<div class="col-6 text-right">
+								<i style="cursor: pointer;" class="fas fa-2x fa-plus-circle" data-ng-click="showAdd = !showAdd"></i>
+							</div>
+						</div>
+
+						<div class="row" style="margin-bottom: 10px;" data-ng-show="showAdd">
+							<div class="col-4">
+								<input type="text" class="form-control form-control-sm" placeholder="Nome do Provedor" on-enter-press="showAdd = !showAdd; vm.Create(provider_name); provider_name = '';" data-ng-model="provider_name" />
+							</div>
+							<div class="col-4">
+								<button type="button" class="btn btn-sm btn-info" data-ng-click="showAdd = !showAdd; vm.Create(provider_name); provider_name = '';">Gravar</button>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-12">
+								<table class="table table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th></th>
+											<th>Nome do Provedor</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="ax in vm.providers">
+											<th class="text-center">
+												<i style="cursor: pointer;" class="fas fa-trash" data-ng-click="vm.Delete(ax._id)"></i> |
+												<i style="cursor: pointer;" class="fas fa-edit" data-ng-click="editName=!editName;"></i>
+											</th>
+											<td>
+												<input data-ng-show="editName" type="text" class="form-control form-control-sm" data-ng-model="ax.name" on-enter-press="editName=!editName;vm.Update(ax)" data-ng-blur="editName=!editName;vm.Update(ax)" />
+												<span data-ng-hide="editName" data-ng-click="editName=!editName;" style="cursor: pointer;">{{ax.name}}</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

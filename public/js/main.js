@@ -58,6 +58,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 
+		.state('menu.frmProviders', {
+			url: '/provider',
+			templateUrl: '../partials/providers.html',
+			controller: 'ProviderController',
+			controllerAs: 'vm'
+		})
+
 
 
 
