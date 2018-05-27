@@ -67,6 +67,8 @@ app.controller('AccountController', function ($http, $state, APIHOST) {
 					data: vm.User
 				}).then(function (res2) {
 					vm.QRCODE = null;
+					localStorage.clear();
+					$state.go('signin');
 				});
 			} else {
 				// CANCELAR TODAS AS ALTERACOES
