@@ -6,7 +6,9 @@ app.controller('ProviderController', function ($http, $state, APIHOST) {
 
 	// verifica se existe um token
 	const jsonwebtoken = localStorage.getItem('jsonwebtoken');
-	if (!jsonwebtoken) {
+	const userId = localStorage.getItem('userId');
+
+	if (!jsonwebtoken || !userId) {
 		$state.go('signin');
 	}
 

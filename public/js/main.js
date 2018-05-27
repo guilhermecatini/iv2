@@ -65,6 +65,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 
+		.state('menu.frmAccount', {
+			url: '/account',
+			templateUrl: '../partials/account.html',
+			controller: 'AccountController',
+			controllerAs: 'vm'
+		})
+
 
 
 
