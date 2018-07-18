@@ -1,8 +1,8 @@
 const globalParams = {
-    accessPort: 8888, // 8888 to prod or 8889 to homolog
-    dataBaseName: 'iv2', // iv2 or iv2tst
+    accessPort: 8889, // 8888 to prod or 8889 to homolog
+    dataBaseName: 'iv2tst', // iv2 or iv2tst
     protectRoutes: true, 
-    enableRegisterUsers: true
+    enableRegisterUsers: false
 }
 
 module.exports = globalParams;
