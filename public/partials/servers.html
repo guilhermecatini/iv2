@@ -1,11 +1,13 @@
-<div class="container" data-ng-init="vm.ListAll()" style="margin-top: 15px;">
+<div class="container-fluid" data-ng-init="vm.ListAll()" style="margin-top: 15px;">
     <div class="row">
 
+        <input type="text" id="auxIpAddress" style="position: fixed; left: -10000; top: -10000px">
 
         <div class="col-12">
             <table class="table table-sm table-striped table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
+                        <th scope="col">&nbsp;</th>
                         <th scope="col">Tipo de Instância</th>
                         <th scope="col">OS</th>
                         <th scope="col">Provedor</th>
@@ -18,11 +20,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="ax in vm.servers" style="cursor: pointer;" ui-sref="menu.frmServerEdit({_id: ax._id})">
+                    <tr data-ng-repeat="ax in vm.servers">
+                        <td style="cursor: pointer;" ui-sref="menu.frmServerEdit({_id: ax._id})" class="text-center"><i class="fas fa-edit"></i></td>
                         <td>{{ax.instance_typeDescription}}</td>
                         <td>{{ax.os}}</td>
                         <td>{{ax.provider.name}}</td>
-                        <td>{{ax.ipv4}}</td>
+                        <td><span id="ipaddress{{$index}}">{{ax.public_ipv4}}</span> <span id="public-ip-{{$index}}"><a data-ng-click="vm.copyPublicAddress(ax.public_ipv4, 'public-ip-'+$index)" style="z-index: 9999999; font-size: 12px;" href="javascript:void(0)">Copy</a></span> </td>
                         <td>{{ax.serverlabel}}</td>
                         <td>{{ax.location}}</td>
                         <td>{{ax.vcpu}}</td>

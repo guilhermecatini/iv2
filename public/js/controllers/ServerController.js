@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ServerController', function ($http, $stateParams, $state, $scope) {
+app.controller('ServerController', function ($http, $stateParams, $state, $scope, $timeout) {
 
 	let vm = this;
 
@@ -200,6 +200,16 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 				vm.ListAllDocuments();
 			});
 		});
+	}
+
+	// copiar endereço de IP
+	vm.copyPublicAddress = function (public_ipv4, publicIpIndex) {
+		$('#'+publicIpIndex).popover({ content: 'Copiado', delay: {'show':0, 'hide':0}});
+		$timeout(function(){
+			$('#'+publicIpIndex).popover('hide');
+		}, 1500);
+		$('#auxIpAddress').val(public_ipv4).select();
+		document.execCommand('Copy');
 	}
 
 	$('#file_upload').change(function () {
