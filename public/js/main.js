@@ -7,7 +7,6 @@ app.value('APIHOST', window.location.protocol + '//' + window.location.host);
 // configurações de rotas
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise('/signin')
 
 	$stateProvider
 
@@ -72,8 +71,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 
-
-
+		$urlRouterProvider.otherwise('/signin')
 
 });
 
