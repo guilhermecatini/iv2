@@ -8,10 +8,12 @@ function callback(res, err, data) {
 
 // create
 if (globalParams.enableRegisterUsers) {
-	router.post('/', (req, res) => {
+	let r2 = require('./SecurityRoutes')(false);
+	let um2 = require('../models/UserModel');
+	r2.post('/', (req, res) => {
 		const body = req.body
 		body.password = crypto.createHash('md5').update(body.password).digest('hex');
-		UserModel.create(body, (err, data) => {
+		um2.create(body, (err, data) => {
 			callback(res, err, data)
 		})
 	});

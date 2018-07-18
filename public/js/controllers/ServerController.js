@@ -43,7 +43,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		});
 	}
 	vm.stateParams = $stateParams;
-	
+
 	// listar todos os servidores
 	vm.ListAll = function () {
 		$http({
@@ -53,6 +53,16 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 				Authorization: jsonwebtoken
 			}
 		}).then(function (res) {
+			res.data.forEach(function (v) {
+				switch (v.instance_type) {
+					case 'CM':
+						v.instance_typeDescription = 'Comum';
+						break;
+					case 'DB':
+						v.instance_typeDescription = 'Banco de Dados';
+						break;
+				}
+			});
 			vm.servers = res.data;
 		});
 	}
@@ -79,7 +89,7 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		vm.ListOne($stateParams._id);
 		vm.ListAllDocuments();
 	}
-	
+
 
 	// add usuário
 	vm.AddUser = function (user) {

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const superSecret = 'dX{KOSm5+m#<?7m{p#.C];p-w(Bul6S&^|{JRd&E&sC5Qox7Rj!MYQ:+AAhl6pR2';
 
-const validate = (security = true) => {
+const validate = (security) => {
 
 	const express = require('express');
 	const router = express.Router();
