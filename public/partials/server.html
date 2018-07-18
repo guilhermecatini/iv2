@@ -27,6 +27,16 @@
                             <div class="tab-pane fade show active" id="tab-dados" role="tabpanel" aria-labelledby="tab-dados-tab">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
+                                        <label for="provider">Tipo de Instância</label>
+                                        <select class="form-control" data-ng-model="vm.server.instance_type">
+                                            <option>&nbsp;</option>
+                                            <option value="CM">Comum</option>
+                                            <option value="DB">Banco de Dados</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
                                         <label for="provider">Provedor</label>
                                         <select class="form-control" data-ng-model="vm.server.provider" data-ng-options="ax._id as ax.name for ax in vm.providers">
                                             <option>&nbsp;</option>
@@ -164,13 +174,13 @@
                                         <hr>
                                         <h4>Arquivos</h4>
                                         <input type="file" style="display: none;" name="file_upload" id="file_upload" />
-                                        <button type="button" class="btn btn-info btn-sm" href="javascript:void(0)" onclick="$('#file_upload').trigger('click')">Enviar Arquivo</button>
+                                        <button type="button" class="btn btn-dark btn-sm" href="javascript:void(0)" onclick="$('#file_upload').trigger('click')">Enviar Arquivo</button>
                                         <hr />
                                     </div>
 
                                     <div class="col-12">
                                         <table class="table">
-                                            <thead class="table-dark">
+                                            <thead>
                                                 <tr>
                                                     <th></th>
                                                     <th>Nome do Arquivo</th>
@@ -202,8 +212,8 @@
                                 <hr />
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn btn-info" data-ng-click="vm.Save()">Gravar</button>
-                                <button type="button" class="btn btn-info" ui-sref="menu.cnsServer">Voltar</button>
+                                <button type="button" class="btn btn-dark" data-ng-click="vm.Save()">Gravar</button>
+                                <button type="button" class="btn btn-dark" ui-sref="menu.cnsServer">Voltar</button>
                             </div>
                             <div class="col-6 text-right">
                                 <button type="button" class="btn btn-danger" data-ng-click="vm.Delete()">Apagar</button>

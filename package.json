@@ -14,7 +14,9 @@
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^4.11.5",
     "morgan": "~1.8.1",
+    "qrcode": "^1.2.0",
     "serve-favicon": "~2.4.2",
+    "speakeasy": "^2.0.0",
     "sweetalert": "^2.1.0"
   }
 }

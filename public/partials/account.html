@@ -1,0 +1,67 @@
+<div class="container" style="margin-top: 15px;">
+    <div class="row" data-ng-show="vm.QRCODE">
+        <div class="col-12">
+            <div class="card">
+                <h5 class="card-header">QR Code - Google Authenticator</h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-12 text-center">
+                            <img data-ng-src="{{vm.QRCODE}}" />
+                        </div>
+                        <div class="col-12 text-center">
+                            <input maxlength="6" style="text-align: center;" type="text" class="form-control" data-ng-model="vm.verifyToken" placeholder="Digite seu Token"
+                            />
+                        </div>
+                        <div class="col-12 text-center">
+                            <hr />
+                            <button type="button" data-ng-disabled="vm.verifyToken.length != 6" class="btn btn-dark" data-ng-click="vm.ValidarToken()">Validar Token</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h5 class="card-header">Informações da Conta</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label>Nome Completo</label>
+                                <input type="text" class="form-control" id="name" data-ng-model="vm.User.name" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label>E-Mail</label>
+                                <input type="text" class="form-control" id="name" data-ng-model="vm.User.email" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <label>Usuário</label>
+                                <input type="text" class="form-control" id="name" data-ng-model="vm.User.user" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <hr />
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-dark">Gravar</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-dark" data-ng-if="vm.User.two_fact_auth == false" data-ng-click="vm.Get2Fa()">Habilitar Two Factor Authentication</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

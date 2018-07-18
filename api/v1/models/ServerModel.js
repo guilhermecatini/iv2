@@ -18,6 +18,7 @@ const _schema = {
   storage: String,
   bandwidth: String,
   os: String,
+  instance_type: String,
   users: [
     {
       user: String,

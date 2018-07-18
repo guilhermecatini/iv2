@@ -6,6 +6,7 @@
             <table class="table table-sm table-striped table-hover table-bordered">
                 <thead class="thead-dark">
                     <tr>
+                        <th scope="col">Tipo de Instância</th>
                         <th scope="col">OS</th>
                         <th scope="col">Provedor</th>
                         <th scope="col">IPv4</th>
@@ -18,6 +19,7 @@
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="ax in vm.servers" style="cursor: pointer;" ui-sref="menu.frmServerEdit({_id: ax._id})">
+                        <td>{{ax.instance_typeDescription}}</td>
                         <td>{{ax.os}}</td>
                         <td>{{ax.provider.name}}</td>
                         <td>{{ax.ipv4}}</td>
@@ -34,7 +36,7 @@
 
         <div class="col-12 text-right">
             <hr />
-            <button type="button" class="btn btn-info" data-ui-sref="menu.frmServer()">Novo Registro</button>
+            <button type="button" class="btn btn-dark" data-ui-sref="menu.frmServer()">Novo Registro</button>
         </div>
 
 
