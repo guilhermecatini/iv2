@@ -4,13 +4,13 @@
 		<div class="col-12 col-sm-12 offset-md-3 col-md-6 offset-lg-3 col-lg-6" style="margin-top: 25px;">
 
 
-			
+
 			<div class="col-12 text-center">
 				<img style="width: 100px;" src="http://iv2.com.br/assets/img/logo.png" alt="http://iv2.com.br/assets/img/logo.png">
 				<br>
 				<span style="font-size: 40px; font-family: Ubuntu">Grupo iv2</span>
 			</div>
-			
+
 
 
 
@@ -38,5 +38,33 @@
 
 		</div>
 
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="mdl_2fa_token" tabindex="-1" role="dialog" aria-labelledby="2FA" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="2FA">Google Authenticator</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<label>Token</label>
+							<input type="text" maxlength="6" id="token" data-ng-model="vm.token" class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-ng-disabled="vm.token.length != 6" data-ng-click="vm.Validate2FA()">Validar</button>
+			</div>
+		</div>
 	</div>
 </div>

@@ -10,16 +10,47 @@ app.controller('UserController', function ($http, $state, APIHOST) {
 	const jsonwebtoken = localStorage.getItem('jsonwebtoken');
 	const userId = localStorage.getItem('userId');
 
-	if (!jsonwebtoken || !userId) {
-		$state.go('signin');
+	if (jsonwebtoken && userId) {
+		$state.go('menu.home');
 	}
 
 	vm.User = {}
 
+	vm.Validate2FA = function () {
+		$http({
+			method: 'POST',
+			url: APIHOST + '/api/v1/login/validate',
+			data: {
+				userId: vm.userId,
+				token: vm.token
+			}
+		}).then(function (res) {
+			if (res.data.isValid === true) {
+				vm.token = '';
+				$('#mdl_2fa_token').modal('toggle');
+				swal({
+					title: 'Sucesso',
+					text: 'Você será redirecionado',
+					icon: 'success',
+					timer: 2000,
+					buttons: false
+				}).then(function (result) {
+					localStorage.setItem('jsonwebtoken', res.data.token);
+					localStorage.setItem('userId', res.data.userId);
+					swal.close()
+					$state.go('menu.cnsServer');
+				});
+			} else {
+				vm.token = '';
+				swal('Token inválido', 'O token digitado não é válido.', 'error');
+			}
+		});
+	}
+
 	vm.SignUp = function () {
 		$http({
 			method: 'POST',
-			url: APIHOST + '/api/v1/user',
+			url: APIHOST + '/api/v1/login/register',
 			data: vm.User
 		}).then(function (data) {
 			swal('OK', 'Sua conta foi criada', 'success');
@@ -38,18 +69,23 @@ app.controller('UserController', function ($http, $state, APIHOST) {
 				swal('Ooops', 'Your username or password is invalid', 'warning')
 				vm.User.password = ''
 			} else {
-				localStorage.setItem('jsonwebtoken', res.data.token);
-				localStorage.setItem('userId', res.data.userId);
-				swal({
-					title: 'Sucesso',
-					text: 'Você será redirecionado',
-					icon: 'success',
-					timer: 2000,
-					showConfirmButton: false
-				}).then(function (result) {
-					swal.close()
-					$state.go('menu.cnsServer');
-				});
+				vm.userId = res.data.userId;
+				if (res.data.twoFactAuth) {
+					$('#mdl_2fa_token').on('shown.bs.modal', function () { $('#token').focus(); }).modal('toggle');
+				} else {
+					swal({
+						title: 'Sucesso',
+						text: 'Você será redirecionado',
+						icon: 'success',
+						timer: 2000,
+						buttons: false
+					}).then(function (result) {
+						localStorage.setItem('jsonwebtoken', res.data.token);
+						localStorage.setItem('userId', res.data.userId);
+						swal.close()
+						$state.go('menu.cnsServer');
+					});
+				}
 			}
 		}, function (err) {
 			swal('Error', 'Contact App Administrator', 'error')
@@ -64,7 +100,7 @@ app.controller('UserController', function ($http, $state, APIHOST) {
 			text: 'Você será redirecionado',
 			icon: 'success',
 			timer: 2000,
-			showConfirmButton: false
+			buttons: false
 		}).then(function (result) {
 			swal.close()
 			$state.go('signin')
