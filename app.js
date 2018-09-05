@@ -27,7 +27,7 @@ const mongoose = require('mongoose');
 
 globalParams = require('./systemparams');
 
-mongoose.connect('mongodb://localhost/' + globalParams.dataBaseName, { useMongoClient: true });
+mongoose.connect('mongodb://localhost/' + globalParams.dataBaseName, { useNewUrlParser: true });
 
 const user = require('./api/v1/routes/UserRoutes');
 const server = require('./api/v1/routes/ServerRoutes');

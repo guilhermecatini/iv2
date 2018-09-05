@@ -12,12 +12,11 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		$state.go('signin');
 	}
 
+	// variáveis de ambiente
+	vm.server = {};
 	vm.servers = [];
 	vm.providers = [];
-
-	vm.server = {};
-	vm.server.users = [];
-
+	vm.serverUsers = [];
 	vm.serverfiles = [];
 
 	// getProviders
@@ -84,16 +83,38 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		});
 	}
 
+	// listar usuários de um servidor
+	vm.ListAllServerUsers = function() {
+		var serverId = $stateParams._id;
+		$http.get('/api/v1/server/users/getByServerId/' + serverId)
+		.then(function (r) {
+			vm.serverUsers = r.data;
+		});
+	}
+
 	// caso estiver em um registro
 	if ($stateParams._id) {
 		vm.ListOne($stateParams._id);
 		vm.ListAllDocuments();
+		//vm.ListAllServerUsers();
 	}
-
 
 	// add usuário
 	vm.AddUser = function (user) {
-		vm.server.users.push(user);
+		user.serverId = $stateParams._id;
+		$http.post('/api/v1/server/users', user)
+		.then(function (r) {
+			vm.ListAllServerUsers();
+		});
+	}
+
+	// gravar usuario alterado
+	vm.AlterUser = function(user) {
+		$http.put('/api/v1/server/users', user)
+		.then(function (r) {
+			swal('Sucesso', 'Registro salvo.', 'success');
+			vm.ListAllServerUsers();
+		});
 	}
 
 	// Grava o Formulário
@@ -165,15 +186,10 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			},
 		}).then(function (value) {
 			if (value === true) {
-				if (user._id) {
-					let userIndex = vm.server.users.map(function (e) { return e._id }).indexOf(user._id);
-					vm.server.users.splice(userIndex, 1);
-					$scope.$apply();
-				} else {
-					let userIndex = vm.server.users.map(function (e) { return e.$$hashKey }).indexOf(user.$$hashKey);
-					vm.server.users.splice(userIndex, 1);
-					$scope.$apply();
-				}
+				$http.delete('/api/v1/server/users/' + user._id)
+				.then(function (r) {
+					vm.ListAllServerUsers();
+				});
 			}
 		});
 	}

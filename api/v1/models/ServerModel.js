@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const _schema = {
   provider: {
@@ -19,16 +19,10 @@ const _schema = {
   bandwidth: String,
   os: String,
   instance_type: String,
-  users: [
-    {
-      user: String,
-      password: String,
-      accesstype: String
-    }
-  ]
+  complemento: String
 }
 
-const ServerSchema = new Schema(_schema, { versionKey:false })
-const ServerModel  = mongoose.model('server', ServerSchema)
+const ServerSchema = new Schema(_schema, { versionKey: false })
+const ServerModel = mongoose.model('server', ServerSchema)
 
 module.exports = ServerModel

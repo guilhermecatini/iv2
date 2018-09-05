@@ -76,5 +76,20 @@ app.controller('AccountController', function ($http, $state, APIHOST) {
 		});
 	}
 
+	// alterar senha
+	vm.AlterPassword = function(passwd) {
+		$http.put('/api/v1/user/alterPassword/' + userId, passwd)
+		.then(function (r) {
+			if (r.data.error) {
+				swal('Erro', 'A senha atual não confere', 'error');
+			} else {
+				swal('Sucesso', 'Senha alterada', 'success');
+				vm.QRCODE = null;
+				localStorage.clear();
+				$state.go('signin');
+			}
+		});
+	}
+
 
 });
