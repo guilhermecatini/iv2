@@ -86,8 +86,13 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 	// listar usuários de um servidor
 	vm.ListAllServerUsers = function() {
 		var serverId = $stateParams._id;
-		$http.get('/api/v1/server/users/getByServerId/' + serverId)
-		.then(function (r) {
+		$http({
+			method: 'GET',
+			url: '/api/v1/server/users/getByServerId/' + serverId,
+			headers: {
+				Authorization: jsonwebtoken
+			}
+		}).then(function (r) {
 			vm.serverUsers = r.data;
 		});
 	}
@@ -102,18 +107,29 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 	// add usuário
 	vm.AddUser = function (user) {
 		user.serverId = $stateParams._id;
-		$http.post('/api/v1/server/users', user)
-		.then(function (r) {
+		$http({
+			method: 'POST',
+			url: '/api/v1/server/users',
+			headers: {
+				Authorization: jsonwebtoken
+			},
+			data: user
+		}).then(function (r) {
 			vm.ListAllServerUsers();
 		});
 	}
 
 	// gravar usuario alterado
 	vm.AlterUser = function(user) {
-		$http.put('/api/v1/server/users', user)
-		.then(function (r) {
+		$http({
+			method: 'PUT',
+			url: '/api/v1/server/users',
+			headers: {
+				Authorization: jsonwebtoken
+			},
+			data: user
+		}).then(function (r) {
 			swal('Sucesso', 'Registro salvo.', 'success');
-			vm.ListAllServerUsers();
 		});
 	}
 
@@ -186,8 +202,13 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			},
 		}).then(function (value) {
 			if (value === true) {
-				$http.delete('/api/v1/server/users/' + user._id)
-				.then(function (r) {
+				$http({
+					method: 'DELETE',
+					url: '/api/v1/server/users/' + user._id,
+					headers: {
+						Authorization: jsonwebtoken
+					}
+				}).then(function (r) {
 					vm.ListAllServerUsers();
 				});
 			}

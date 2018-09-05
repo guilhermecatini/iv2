@@ -78,8 +78,14 @@ app.controller('AccountController', function ($http, $state, APIHOST) {
 
 	// alterar senha
 	vm.AlterPassword = function(passwd) {
-		$http.put('/api/v1/user/alterPassword/' + userId, passwd)
-		.then(function (r) {
+		$http({
+			method:'PUT',
+			url:'/api/v1/user/alterPassword/' + userId,
+			headers: {
+				Authorization: jsonwebtoken
+			},
+			data: passwd
+		}).then(function (r) {
 			if (r.data.error) {
 				swal('Erro', 'A senha atual não confere', 'error');
 			} else {
