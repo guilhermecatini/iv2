@@ -7,7 +7,6 @@ app.value('APIHOST', window.location.protocol + '//' + window.location.host);
 // configurações de rotas
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise('/signin')
 
 	$stateProvider
 
@@ -72,8 +71,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 
+		.state('menu.frmAccountPassword', {
+			url: '/account/password',
+			templateUrl: '../partials/alter-password.html',
+			controller: 'AccountController',
+			controllerAs: 'vm'
+		})
 
-
+		$urlRouterProvider.otherwise('/signin')
 
 });
 

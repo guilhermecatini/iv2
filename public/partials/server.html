@@ -15,7 +15,7 @@
                             </li>
                             <li class="nav-item" data-ng-if="vm.stateParams._id">
                                 <a class="nav-link" id="tab-usuarios-tab" data-toggle="pill" href="javascript:void(0)" data-target="#tab-usuarios" role="tab"
-                                    aria-controls="tab-usuarios" aria-selected="true">Usuários</a>
+                                    aria-controls="tab-usuarios" aria-selected="true" data-ng-click="vm.ListAllServerUsers()">Usuários</a>
                             </li>
                             <li class="nav-item" data-ng-if="vm.stateParams._id">
                                 <a class="nav-link" id="tab-arquivos-tab" data-toggle="pill" href="javascript:void(0)" role="tab" data-target="#tab-arquivos"
@@ -100,6 +100,10 @@
                                         <label for="os">OS</label>
                                         <input type="text" class="form-control" id="os" data-ng-model="vm.server.os">
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="complemento">Complemento</label>
+                                        <input type="text" class="form-control" id="complemento" data-ng-model="vm.server.complemento">
+                                    </div>
                                 </div>
                             </div>
                             <!-- fim tab dados -->
@@ -136,6 +140,7 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col"></th>
                                                     <th scope="col">Usuário</th>
                                                     <th scope="col">Senha</th>
                                                     <th scope="col">Tipo de Acesso</th>
@@ -143,7 +148,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="ax in vm.server.users">
+                                                <tr data-ng-repeat="ax in vm.serverUsers">
+                                                    <td class="text-center">
+                                                        <i style="cursor: pointer; margin-top: 10px;" class="fas fa-save" data-ng-click="vm.AlterUser(ax)"></i>
+                                                    </td>
                                                     <td>
                                                         <input type="text" data-ng-model="ax.user" class="form-control" />
                                                     </td>

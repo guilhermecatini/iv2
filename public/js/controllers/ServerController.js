@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ServerController', function ($http, $stateParams, $state, $scope) {
+app.controller('ServerController', function ($http, $stateParams, $state, $scope, $timeout) {
 
 	let vm = this;
 
@@ -12,12 +12,11 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		$state.go('signin');
 	}
 
+	// variáveis de ambiente
+	vm.server = {};
 	vm.servers = [];
 	vm.providers = [];
-
-	vm.server = {};
-	vm.server.users = [];
-
+	vm.serverUsers = [];
 	vm.serverfiles = [];
 
 	// getProviders
@@ -84,16 +83,54 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 		});
 	}
 
+	// listar usuários de um servidor
+	vm.ListAllServerUsers = function() {
+		var serverId = $stateParams._id;
+		$http({
+			method: 'GET',
+			url: '/api/v1/server/users/getByServerId/' + serverId,
+			headers: {
+				Authorization: jsonwebtoken
+			}
+		}).then(function (r) {
+			vm.serverUsers = r.data;
+		});
+	}
+
 	// caso estiver em um registro
 	if ($stateParams._id) {
 		vm.ListOne($stateParams._id);
 		vm.ListAllDocuments();
+		//vm.ListAllServerUsers();
 	}
-
 
 	// add usuário
 	vm.AddUser = function (user) {
-		vm.server.users.push(user);
+		user.serverId = $stateParams._id;
+		$http({
+			method: 'POST',
+			url: '/api/v1/server/users',
+			headers: {
+				Authorization: jsonwebtoken
+			},
+			data: user
+		}).then(function (r) {
+			vm.ListAllServerUsers();
+		});
+	}
+
+	// gravar usuario alterado
+	vm.AlterUser = function(user) {
+		$http({
+			method: 'PUT',
+			url: '/api/v1/server/users',
+			headers: {
+				Authorization: jsonwebtoken
+			},
+			data: user
+		}).then(function (r) {
+			swal('Sucesso', 'Registro salvo.', 'success');
+		});
 	}
 
 	// Grava o Formulário
@@ -165,15 +202,15 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 			},
 		}).then(function (value) {
 			if (value === true) {
-				if (user._id) {
-					let userIndex = vm.server.users.map(function (e) { return e._id }).indexOf(user._id);
-					vm.server.users.splice(userIndex, 1);
-					$scope.$apply();
-				} else {
-					let userIndex = vm.server.users.map(function (e) { return e.$$hashKey }).indexOf(user.$$hashKey);
-					vm.server.users.splice(userIndex, 1);
-					$scope.$apply();
-				}
+				$http({
+					method: 'DELETE',
+					url: '/api/v1/server/users/' + user._id,
+					headers: {
+						Authorization: jsonwebtoken
+					}
+				}).then(function (r) {
+					vm.ListAllServerUsers();
+				});
 			}
 		});
 	}
@@ -200,6 +237,16 @@ app.controller('ServerController', function ($http, $stateParams, $state, $scope
 				vm.ListAllDocuments();
 			});
 		});
+	}
+
+	// copiar endereço de IP
+	vm.copyPublicAddress = function (public_ipv4, publicIpIndex) {
+		$('#'+publicIpIndex).popover({ content: 'Copiado', delay: {'show':0, 'hide':0}});
+		$timeout(function(){
+			$('#'+publicIpIndex).popover('hide');
+		}, 1500);
+		$('#auxIpAddress').val(public_ipv4).select();
+		document.execCommand('Copy');
 	}
 
 	$('#file_upload').change(function () {

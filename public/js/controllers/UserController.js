@@ -10,8 +10,8 @@ app.controller('UserController', function ($http, $state, APIHOST) {
 	const jsonwebtoken = localStorage.getItem('jsonwebtoken');
 	const userId = localStorage.getItem('userId');
 
-	if (jsonwebtoken && userId) {
-		$state.go('menu.home');
+	if (!jsonwebtoken && !userId) {
+		//$state.go('signin');
 	}
 
 	vm.User = {}

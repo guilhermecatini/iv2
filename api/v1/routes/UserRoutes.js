@@ -1,5 +1,6 @@
 const router = require('./SecurityRoutes')(globalParams.protectRoutes);
 const UserModel = require('../models/UserModel');
+const crypto  = require('crypto');
 
 function callback(res, err, data) {
 	if (err) return res.status(500).json(err)
@@ -14,10 +15,31 @@ if (globalParams.enableRegisterUsers) {
 		const body = req.body
 		body.password = crypto.createHash('md5').update(body.password).digest('hex');
 		um2.create(body, (err, data) => {
-			callback(res, err, data)
-		})
+			callback(res, err, data);
+		});
 	});
 }
+
+// alter password
+router.put('/alterPassword/:_id', (req, res) => {
+
+	const newPassword = crypto.createHash('md5').update(req.body.new_password).digest('hex');
+	const oldPassword = crypto.createHash('md5').update(req.body.old_password).digest('hex');
+
+	UserModel.findById(req.params._id, {password:true, _id:false} ,(err, data) => {
+		
+		var currentPassword = data.password;
+
+		if (oldPassword == currentPassword) {
+			UserModel.update({_id: req.params._id}, {password: newPassword}, (err, data) => {
+				callback(res, err, data);
+			});
+		} else {
+			callback(res, err, {error: true, message: 'As senhas não conferem.'});
+		}
+
+	});
+});
 
 // Retrieve
 router.get('/', (req, res) => {

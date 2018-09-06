@@ -1,19 +1,8 @@
-const env = 'P'; // P = Prdocution / H = Homolog
-
-if (env=='P') {
-    const globalParams = {
-        accessPort: 8888,
-        dataBaseName: 'iv2',
-        protectRoutes: true, 
-        enableRegisterUsers: false
-    }
-} else {
-    const globalParams = {
-        accessPort: 8889,
-        dataBaseName: 'iv2tst',
-        protectRoutes: false, 
-        enableRegisterUsers: true
-    }
+const globalParams = {
+    accessPort: 8889, // 8888 to prod or 8889 to homolog
+    dataBaseName: 'iv2tst', // iv2 or iv2tst
+    protectRoutes: true, 
+    enableRegisterUsers: true
 }
 
 module.exports = globalParams;
