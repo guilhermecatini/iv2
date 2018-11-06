@@ -6,25 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-
-
-
-
-
-// para gerar o código de validação
-// var aaa = speakeasy.totp({
-//   secret: 'N5WGM2ZVPFEFK5CUIRZGKZKNNM3WO23FGN3FIY3ZORJVM6CVGQ3A',
-//   encoding: 'base32'
-// });
-
-// console.log(aaa);
-
-
-
-
-
-
-
 globalParams = require('./systemparams');
 
 mongoose.connect('mongodb://localhost/' + globalParams.dataBaseName, { useNewUrlParser: true });
@@ -36,6 +17,8 @@ const file = require('./api/v1/routes/FileRoutes');
 const login = require('./api/v1/routes/LoginRoutes');
 const twofactauth = require('./api/v1/routes/TwoFactAuthRoutes');
 
+const utilitiesRoutes = require('./api/v1/routes/UtilitiesRoutes');
+
 const app = express();
 
 app.use(function (req, res, next) {
@@ -46,7 +29,7 @@ app.use(function (req, res, next) {
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
@@ -63,6 +46,8 @@ app.use('/api/v1/provider', provider);
 app.use('/api/v1/file', file);
 app.use('/api/v1/2fa', twofactauth);
 
+app.use('/utilities', utilitiesRoutes);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	const err = new Error('Not Found');
@@ -78,7 +63,7 @@ app.use(function (err, req, res, next) {
 
 	// render the error page
 	res.status(err.status || 500);
-	res.render('error');
+	res.render('404');
 })
 
 module.exports = app;

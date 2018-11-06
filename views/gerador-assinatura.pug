@@ -1,0 +1,46 @@
+div
+  table(style="font-family: 'Arial'; font-size: 14px; color:#007DB5;")
+    tbody
+      tr
+        td
+          table
+            tbody
+              tr
+                td
+                  img(src='https://i.catini.org/logo-iv2-138x186.png')
+        td(style='width: 250px;')
+          table(cellpadding='2')
+            tbody
+              tr
+                td(style='color:#A6CE39; font-size: 13px;') #{data.nome_completo}
+              tr
+                td(style='color:#575656; font-size: 13px;')
+                  b Grupo iv2
+              tr
+                td(style='color:#575656; font-size: 13px;') #{data.cargo}
+              tr
+                td
+                  a(style='text-decoration:none;color:#019DBD; font-size: 13px;', href='mailto:'+data.email) #{data.email}
+              tr
+                td
+                  a(style='text-decoration:none;color:#575656; font-size: 13px;', href='tel:+551124485611') (11) 2448-5611 
+                  a(style='text-decoration:none;color:#575656; font-size: 13px;', href='tel:+55'+data.celular) (#{data.celular.substr(0,2)}) #{data.celular.substr(2,1)} #{data.celular.substr(3,4)} - #{data.celular.substr(7,4)}
+              tr
+                td
+                  a(style='text-decoration:none;color:#019DBD; font-size: 13px;', target='_blank', href='http://www.iv2.com.br') www.iv2.com.br
+              tr
+                td
+                  a(style='text-decoration:none;color:#019DBD; font-size: 13px;', target='_blank', href='https://www.facebook.com/pages/category/Information-Technology-Company/Grupo-iv2-624138357708958/')
+                    img(src='https://iv2.com.br/images/facebook-logo.png')
+                  a(style='text-decoration:none;color:#019DBD; font-size: 13px;', target='_blank', href='https://www.youtube.com/user/TotvsIV2/videos')
+                    img(src='https://iv2.com.br/images/youtube-logo.png')
+                  a(style='text-decoration:none;color:#019DBD; font-size: 13px;', target='_blank', href='https://br.linkedin.com/company/iv2-tecnologia-e-sistemas')
+                    img(src='https://iv2.com.br/images/linkedin-logo.png')
+        td
+          table
+            tbody
+              tr
+                td
+                  img(src='https://i.catini.org/fluig-logo.png')
+  img(src='https://iv2.com.br/images/footer.jpg')
+  
