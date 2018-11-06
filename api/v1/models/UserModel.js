@@ -32,7 +32,7 @@ const _schema = {
 	}
 }
 
-const UserSchema = new Schema(_schema, { versionKey: false })
-const UserModel = mongoose.model('user', UserSchema)
+const UserSchema = new Schema(_schema, { versionKey: false });
+const UserModel = mongoose.model('user', UserSchema);
 
-module.exports = UserModel
+module.exports = UserModel;

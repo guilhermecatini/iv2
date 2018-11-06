@@ -71,6 +71,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 
+		.state('menu.frmAccountPassword', {
+			url: '/account/password',
+			templateUrl: '../partials/alter-password.html',
+			controller: 'AccountController',
+			controllerAs: 'vm'
+		})
+
 		$urlRouterProvider.otherwise('/signin')
 
 });
