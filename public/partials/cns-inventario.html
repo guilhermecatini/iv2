@@ -1,0 +1,47 @@
+<div class="container-fluid" data-ng-init="vm.ListAll()" style="margin-top: 15px;">
+    <div class="row">
+
+        <input type="text" id="auxIpAddress" style="position: fixed; left: -10000; top: -10000px">
+
+        <div class="col-12">
+            <label>Pesquisar</label>
+            <input type="text" class="form-control" data-ng-model="search" />
+            <hr />
+        </div>
+
+        <div class="col-12">
+            <table class="table table-sm table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Número de Série</th>
+                        <th scope="col">Responsável</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Valor Estimado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="ax in vm.Inventarios | filter: search">
+                        <td style="cursor: pointer;" ui-sref="menu.frmInventarioEdit({_id: ax._id})" class="text-center"><i class="fas fa-edit"></i></td>
+                        <td>{{ax.marca_equipamento}}</td>
+                        <td>{{ax.modelo}}</td>
+                        <td>{{ax.numero_serie}}</td>
+                        <td>{{ax.responsavel}}</td>
+                        <td>{{ax.tipo_equipamento}}</td>
+                        <td>{{ax.valor_estimado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-12 text-right">
+            <hr />
+            <button type="button" class="btn btn-dark" data-ui-sref="menu.frmInventario()">Novo Registro</button>
+        </div>
+
+
+    </div>
+</div>

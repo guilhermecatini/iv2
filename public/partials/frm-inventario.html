@@ -1,0 +1,74 @@
+<div class="container-fluid" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <span class="card-header">Cadastro de Equipamento</span>
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <!-- Linha 1 -->
+                            <div class="row">
+                                <div class="col-12 col-md-3">
+                                    <label for="tipo">Tipo</label>
+                                    <select class="form-control form-control-sm" data-ng-options="ax.id as ax.nome for ax in vm.TIPOS_EQUIPAMENTO"
+                                        data-ng-model="vm.Inventario.tipo_equipamento"></select>
+                                </div>
+
+                                <div class="col-12 col-md-3">
+                                    <label for="marca">Marca</label>
+                                    <select class="form-control form-control-sm" data-ng-options="ax.id as ax.nome for ax in vm.MARCAS"
+                                        data-ng-model="vm.Inventario.marca_equipamento"></select>
+                                </div>
+
+                                <div class="col-12 col-md-3">
+                                    <label for="modelo">Modelo</label>
+                                    <input class="form-control form-control-sm" data-ng-model="vm.Inventario.modelo" />
+                                </div>
+
+                                <div class="col-12 col-md-3">
+                                    <label for="responsavel">Responsável</label>
+                                    <select class="form-control form-control-sm" data-ng-options="ax.login as ax.colleagueName for ax in vm.USUARIOS_FLUIG"
+                                        data-ng-model="vm.Inventario.responsavel"></select>
+                                </div>
+                            </div>
+
+                            <!-- Linha 2 -->
+                            <div class="row">
+                                <div class="col-12 col-md-3">
+                                    <label for="serial">Serial</label>
+                                    <input class="form-control form-control-sm" data-ng-model="vm.Inventario.numero_serie" />
+                                </div>
+
+                                <div class="col-12 col-md-3">
+                                    <label for="valor_estimado">Valor Estimado</label>
+                                    <input class="form-control form-control-sm" data-ng-model="vm.Inventario.valor_estimado" />
+                                </div>
+                            </div>
+
+                            <!-- Linha 3 -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="observacao">Observação</label>
+                                    <textarea class="form-control form-control-sm" rows="7" data-ng-model="vm.Inventario.observacao"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <hr />
+                                    <button type="button" data-ng-click="vm.Save()" class="btn btn-dark btn-sm">Gravar</button>
+                                    <button type="button" class="btn btn-dark btn-sm" data-ui-sref="menu.cnsInventario()">Voltar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

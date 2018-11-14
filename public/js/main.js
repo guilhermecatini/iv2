@@ -78,6 +78,35 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 
+		.state('menu.frmJobCandidate', {
+			url: '/job-candidate/new',
+			templateUrl: '../partials/frm-job-candidate.html',
+			controller: 'JobCandidateController',
+			controllerAs: 'vm'
+		})
+
+		.state('menu.cnsInventario', {
+			url: '/inventarios',
+			templateUrl: '../partials/cns-inventario.html',
+			controller: 'InventarioController',
+			controllerAs: 'vm'
+		})
+
+		.state('menu.frmInventario', {
+			url: '/inventario',
+			templateUrl: '../partials/frm-inventario.html',
+			controller: 'InventarioController',
+			controllerAs: 'vm'
+		})
+
+		.state('menu.frmInventarioEdit', {
+			url: '/inventario/:_id',
+			templateUrl: '../partials/frm-inventario.html',
+			controller: 'InventarioController',
+			controllerAs: 'vm'
+		})
+		
+
 		$urlRouterProvider.otherwise('/signin')
 
 });

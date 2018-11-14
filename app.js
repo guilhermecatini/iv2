@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 globalParams = require('./systemparams');
 
-mongoose.connect('mongodb://localhost/' + globalParams.dataBaseName, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/' + globalParams.dataBaseName, { useNewUrlParser: true, useCreateIndex: true });
 
 const user = require('./api/v1/routes/UserRoutes');
 const server = require('./api/v1/routes/ServerRoutes');
@@ -18,6 +18,9 @@ const login = require('./api/v1/routes/LoginRoutes');
 const twofactauth = require('./api/v1/routes/TwoFactAuthRoutes');
 
 const utilitiesRoutes = require('./api/v1/routes/UtilitiesRoutes');
+const jobCandidateRoutes = require('./api/v1/routes/JobCandidateRoutes');
+const inventarioRoutes = require('./api/v1/routes/InventarioRoutes');
+const wsFluigRoutes = require('./api/v1/routes/FluigRoutes');
 
 const app = express();
 
@@ -47,6 +50,9 @@ app.use('/api/v1/file', file);
 app.use('/api/v1/2fa', twofactauth);
 
 app.use('/utilities', utilitiesRoutes);
+app.use('/job-candidate', jobCandidateRoutes);
+app.use('/inventario', inventarioRoutes);
+app.use('/fluig', wsFluigRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
