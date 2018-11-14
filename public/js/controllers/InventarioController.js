@@ -102,13 +102,31 @@ app.controller('InventarioController', function ($http, $state, $stateParams, AP
     vm.ListAll = function () {
         $http({
             method: 'GET',
-            url: '/inventario',
+            url: '/fluig/ECMColleagueService/getColleagues',
             headers: {
                 Authorization: jsonwebtoken
             }
         }).then(function (res) {
-            vm.Inventarios = res.data;
-        })
+            $http({
+                method: 'GET',
+                url: '/inventario',
+                headers: {
+                    Authorization: jsonwebtoken
+                }
+            }).then(function (res2) {
+                vm.Inventarios = res2.data;
+
+                var i, j;
+                for(i=0;i<vm.Inventarios.length;i++) {
+                    for(j=0;j<res.data.length;j++) {
+                        if(vm.Inventarios[i].responsavel == res.data[j].login) {
+                            vm.Inventarios[i].nome_responsavel = res.data[j].colleagueName;
+                        }
+                    }
+                }
+
+            });
+        });
     }
 
     /**
