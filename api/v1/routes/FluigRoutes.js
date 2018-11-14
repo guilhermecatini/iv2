@@ -12,7 +12,7 @@ router.get('/ECMColleagueService/getColleagues', (req, res) => {
 	let url = 'https://fluig.iv2.com.br/webdesk/ECMColleagueService?wsdl';
 	let username = 'guilherme.catini';
 	let password = 'ggcr2305';
-    let companyId = 'IV2';
+    let companyId = '1';
 
 	let headers = {
         "Content-Type": "text/xml;charset=UTF-8",
