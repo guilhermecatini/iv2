@@ -4,6 +4,8 @@ app.controller('InventarioController', function ($http, $stateParams, APIHOST, $
 
     let vm = this;
 
+    vm.Inventarios = [];
+
     // verifica se existe um token
     const jsonwebtoken = localStorage.getItem('jsonwebtoken');
     const userId = localStorage.getItem('userId');
@@ -48,6 +50,8 @@ app.controller('InventarioController', function ($http, $stateParams, APIHOST, $
     ];
 
     vm.USUARIOS_FLUIG = [];
+
+    
 
     $http({
         method: 'GET',
