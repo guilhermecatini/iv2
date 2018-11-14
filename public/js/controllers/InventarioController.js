@@ -55,7 +55,10 @@ app.controller('InventarioController', function ($http, $stateParams, APIHOST, $
 
     $http({
         method: 'GET',
-        url: '/fluig/ECMColleagueService/getColleagues'
+        url: '/fluig/ECMColleagueService/getColleagues',
+        headers: {
+            Authorization: jsonwebtoken
+        }
     }).then(function (res) {
         vm.USUARIOS_FLUIG = res.data;
     });
@@ -98,7 +101,10 @@ app.controller('InventarioController', function ($http, $stateParams, APIHOST, $
     vm.ListAll = function () {
         $http({
             method: 'GET',
-            url: '/inventario'
+            url: '/inventario',
+            headers: {
+                Authorization: jsonwebtoken
+            }
         }).then(function (res) {
             vm.Inventarios = res.data;
         })
