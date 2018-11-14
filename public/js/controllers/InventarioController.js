@@ -53,15 +53,17 @@ app.controller('InventarioController', function ($http, $stateParams, APIHOST, $
 
     
 
-    $http({
-        method: 'GET',
-        url: '/fluig/ECMColleagueService/getColleagues',
-        headers: {
-            Authorization: jsonwebtoken
-        }
-    }).then(function (res) {
-        vm.USUARIOS_FLUIG = res.data;
-    });
+    vm.GetFluigUsers = function () {
+        $http({
+            method: 'GET',
+            url: '/fluig/ECMColleagueService/getColleagues',
+            headers: {
+                Authorization: jsonwebtoken
+            }
+        }).then(function (res) {
+            vm.USUARIOS_FLUIG = res.data;
+        });
+    }
 
     /**
      * Gravar
