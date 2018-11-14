@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('InventarioController', function ($http, $stateParams, APIHOST, $scope) {
+app.controller('InventarioController', function ($http, $state, $stateParams, APIHOST, $scope) {
 
     let vm = this;
 
@@ -78,7 +78,6 @@ app.controller('InventarioController', function ($http, $stateParams, APIHOST, $
                     Authorization: jsonwebtoken
                 }
             }).then(function (res) {
-                console.log(res.data)
                 swal('Sucesso', 'Registro salvo.', 'success');
                 vm.ListOne($stateParams._id);
             });
