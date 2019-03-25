@@ -16,7 +16,6 @@ router.post('/', (req, res) => {
         symbols: false,
         otpauth_url: true,
         name: 'Grupo iv2 ( ' + body.name + ' )',
-        qr_codes: false,
         google_auth_qr: false
     });
 
